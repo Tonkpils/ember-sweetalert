@@ -1,4 +1,4 @@
-# Ember-cli-sweetalert
+# Ember Sweet Alert
 
 This README outlines the details of collaborating on this Ember addon.
 

@@ -1,7 +1,7 @@
 {
   "name": "ember-cli-sweetalert",
   "version": "0.0.0",
-  "description": "The default blueprint for ember-cli addons.",
+  "description": "Ember Sweet Alerts",
   "directories": {
     "doc": "doc",
     "test": "tests"
@@ -11,11 +11,11 @@
     "start": "ember server",
     "test": "ember try:testall"
   },
-  "repository": "",
+  "repository": "https://github.com/Tonkpils/ember-cli-sweetalert",
   "engines": {
     "node": ">= 0.10.0"
   },
-  "author": "",
+  "author": "Leo Correa",
   "license": "MIT",
   "devDependencies": {
     "broccoli-asset-rev": "^2.4.2",
@@ -40,10 +40,15 @@
     "loader.js": "^4.0.1"
   },
   "keywords": [
-    "ember-addon"
+    "ember-addon",
+    "sweetalert",
+    "sweetalert2",
+    "modal",
+    "alert"
   ],
   "dependencies": {
-    "ember-cli-babel": "^5.1.6"
+    "ember-cli-babel": "^5.1.6",
+    "sweetalert2": "^2.2.7"
   },
   "ember-addon": {
     "configPath": "tests/dummy/config"

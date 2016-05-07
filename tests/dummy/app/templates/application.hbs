@@ -1,3 +1,11 @@
 <h2 id="title">Welcome to Ember</h2>
 
+<a href="#" {{action 'toggle'}}>Toggle</a>
+{{sweet-alert
+show=toggleModal
+title="Ember CLI Sweet Alert"
+message="Awesome!"
+type="error"
+callback=(action 'testing')
+}}
 {{outlet}}
