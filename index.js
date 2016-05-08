@@ -2,7 +2,7 @@
 'use strict';
 
 module.exports = {
-  name: 'ember-cli-sweetalert',
+  name: 'ember-sweetalert',
   included: function(app, parentAddon) {
     let target = (parentAddon || app);
 

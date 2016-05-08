@@ -1,5 +1,5 @@
 {
-  "name": "ember-cli-sweetalert",
+  "name": "ember-sweetalert",
   "version": "0.0.0",
   "description": "Ember Sweet Alerts",
   "directories": {
@@ -11,7 +11,7 @@
     "start": "ember server",
     "test": "ember try:testall"
   },
-  "repository": "https://github.com/Tonkpils/ember-cli-sweetalert",
+  "repository": "https://github.com/Tonkpils/ember-sweetalert",
   "engines": {
     "node": ">= 0.10.0"
   },

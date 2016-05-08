@@ -1,12 +1,14 @@
 # Ember Sweet Alert
 
-This README outlines the details of collaborating on this Ember addon.
+An [ember-cli](http://www.ember-cli.com/) addon for using [Sweet Alert](https://limonte.github.io/sweetalert2/) in Ember applications.
 
 ## Installation
 
-* `git clone` this repository
-* `npm install`
-* `bower install`
+In your application's directory:
+
+```
+ember install ember-sweetalert
+```
 
 ## Running
 

@@ -1,3 +1,3 @@
-import SweetAlert from 'ember-cli-sweetalert/components/sweet-alert';
+import SweetAlert from 'ember-sweetalert/components/sweet-alert';
 
 export default SweetAlert;
