@@ -3,15 +3,23 @@ import Ember from 'ember';
 const { Component } = Ember;
 
 export default Component.extend({
-  show: false,
+  show: true,
   message: "",
   title: "",
   type: "",
   callback: () => {},
 
-  setupSweetAlert: Ember.on('didInsertElement', function() {}),
+  setupSweetAlert: Ember.on('didInsertElement', function() {
+    this._displaySweetAlert();
+  }),
 
   updateAttrs: Ember.on('didUpdateAttrs', function() {
+    this._displaySweetAlert();
+  }),
+
+  teardownSweetAlert: Ember.on('willDestroyElement', function() {}),
+
+  _displaySweetAlert() {
     if (this.get('show')) {
       window.swal(this.get('title'), this.get('message'), this.get('type')).then((confirm) => {
         let cb = this.get('callback');
@@ -19,9 +27,5 @@ export default Component.extend({
         this.set('show', false);
       });
     }
-  }),
-
-  teardownSweetAlert: Ember.on('willDestroyElement', function() {
-    this.get('sweet-alert').destroy();
-  })
+  }
 });

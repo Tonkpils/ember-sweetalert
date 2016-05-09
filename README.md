@@ -10,10 +10,13 @@ In your application's directory:
 ember install ember-sweetalert
 ```
 
-## Running
+## Usage
 
-* `ember server`
-* Visit your app at http://localhost:4200.
+The `sweet-alert` component allows setting SweetAlert's attributes.
+
+```
+{{sweet-alert title="Hello World" type="success"}}
+```
 
 ## Running Tests
 
