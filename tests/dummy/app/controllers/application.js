@@ -1,18 +1,19 @@
 import Ember from 'ember';
+import SweetAlertMixin from 'ember-sweetalert/mixins/sweetalert-mixin';
 
-export default Ember.Controller.extend({
+export default Ember.Controller.extend(SweetAlertMixin, {
   toggleModal: false,
 
   actions: {
     testing() {
-      window.swal({
+      this.sweetAlert({
         title: 'Submit email to run ajax request',
         input: 'email',
         showCancelButton: true,
         confirmButtonText: 'Submit',
         preConfirm: function() {
           return new Ember.RSVP.Promise(function(resolve) {
-            window.swal.enableLoading();
+            this.sweetAlert.enableLoading();
             setTimeout(function() {
               resolve();
             }, 2000);
@@ -21,7 +22,7 @@ export default Ember.Controller.extend({
         allowOutsideClick: false
       }).then(function(email) {
         if (email) {
-          window.swal({
+          this.sweetAlert({
             type: 'success',
             title: 'Ajax request finished!',
             html: 'Submitted email: ' + email

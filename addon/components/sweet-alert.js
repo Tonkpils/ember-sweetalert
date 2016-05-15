@@ -1,4 +1,5 @@
 import Ember from 'ember';
+import sweetAlert from 'sweetalert2';
 
 const { Component } = Ember;
 
@@ -21,7 +22,7 @@ export default Component.extend({
 
   _displaySweetAlert() {
     if (this.get('show')) {
-      window.swal(this.get('title'), this.get('message'), this.get('type')).then((confirm) => {
+      sweetAlert(this.get('title'), this.get('message'), this.get('type')).then((confirm) => {
         let cb = this.get('callback');
         cb(confirm);
         this.set('show', false);

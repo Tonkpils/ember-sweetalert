@@ -1,14 +1,27 @@
+
 /* jshint node: true */
 'use strict';
 
+// var BabelTranspiler = require('broccoli-babel-transpiler');
+var Funnel = require('broccoli-funnel');
+var MergeTrees = require('broccoli-merge-trees');
+
 module.exports = {
   name: 'ember-sweetalert',
-  included: function(app, parentAddon) {
-    let target = (parentAddon || app);
 
-    target.import(`${target.bowerDirectory}/sweetalert2/dist/sweetalert2.min.js`);
-    target.import(`${target.bowerDirectory}/sweetalert2/dist/sweetalert2.min.css`);
-    target.import(`${target.bowerDirectory}/es6-promise-polyfill/promise.min.js`);
-    // TODO: import IE support if configured to do so...
+  treeForAddon: function() {
+    var addonTree = this._super.treeForAddon.apply(this, arguments);
+
+    var swal = new Funnel('node_modules/sweetalert2/src', {
+      destDir: 'modules',
+      files: ['sweetalert2.js']
+    });
+
+    var swalStyles = new Funnel('node_modules/sweetalert2/dist', {
+      destDir: 'assets',
+      files: ['sweetalert2.css']
+    });
+
+    return new MergeTrees([addonTree, swal, swalStyles]);
   }
 };
