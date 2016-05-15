@@ -1,7 +1,7 @@
 {
   "name": "ember-sweetalert",
   "version": "0.0.0",
-  "description": "Ember Sweet Alerts",
+  "description": "Ember Sweet Alerts with SweetAlert2",
   "directories": {
     "doc": "doc",
     "test": "tests"
