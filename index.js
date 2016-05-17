@@ -2,7 +2,6 @@
 /* jshint node: true */
 'use strict';
 
-// var BabelTranspiler = require('broccoli-babel-transpiler');
 var Funnel = require('broccoli-funnel');
 var MergeTrees = require('broccoli-merge-trees');
 

@@ -47,7 +47,6 @@
     "alert"
   ],
   "dependencies": {
-    "broccoli-babel-transpiler": "^5.4.5",
     "broccoli-funnel": "^0.2.12",
     "broccoli-merge-trees": "^0.2.4",
     "ember-cli-babel": "^5.1.6",
