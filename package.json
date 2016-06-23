@@ -51,7 +51,7 @@
     "broccoli-merge-trees": "^0.2.4",
     "ember-cli-babel": "^5.1.6",
     "ember-cli-htmlbars": "^1.0.3",
-    "sweetalert2": "^3.0.0"
+    "sweetalert2": "3.0.0"
   },
   "ember-addon": {
     "configPath": "tests/dummy/config"
