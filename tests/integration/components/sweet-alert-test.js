@@ -1,7 +1,7 @@
 import { moduleForComponent, test } from 'ember-qunit';
 
 moduleForComponent('sweet-alert', 'Integration | Component | sweet alert', {
-  integration: true,
+  integration: true
 });
 
 test('it renders', function(assert) {
