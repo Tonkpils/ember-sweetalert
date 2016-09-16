@@ -1,7 +1,8 @@
 import Ember from 'ember';
-import swal from 'sweetalert2';
+import sweetAlert from '../index';
 
-export default Ember.Mixin.create({
-  swal: swal,
-  sweetAlert: swal
+const { Mixin } = Ember;
+
+export default Mixin.create({
+  sweetAlert: sweetAlert
 });

@@ -1,0 +1,1 @@
+export default Sweetalert2;
