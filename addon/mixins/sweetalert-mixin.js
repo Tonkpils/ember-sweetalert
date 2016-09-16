@@ -4,5 +4,5 @@ import sweetAlert from '../index';
 const { Mixin } = Ember;
 
 export default Mixin.create({
-  sweetAlert: sweetAlert
+  sweetAlert
 });
