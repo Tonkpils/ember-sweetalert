@@ -9,6 +9,6 @@ module.exports = {
     app.import(app.bowerDirectory + '/sweetalert2/dist/sweetalert2.js');
     app.import(app.bowerDirectory + '/sweetalert2/dist/sweetalert2.css');
     
-    app.import(this.treePaths.vendor + '/shim.js');
+    app.import(this.treePaths.vendor + '/shims.js');
   }
 };
