@@ -1,7 +1,5 @@
-import Ember from 'ember';
+import Mixin from '@ember/object';
 import sweetAlert from '../index';
-
-const { Mixin } = Ember;
 
 export default Mixin.create({
   sweetAlert

@@ -1,7 +1,6 @@
-import Ember from 'ember';
+import Controller from '@ember/controller';
+import { Promise } from 'rsvp';
 import SweetAlertMixin from 'ember-sweetalert/mixins/sweetalert-mixin';
-
-const { Controller, RSVP } = Ember;
 
 export default Controller.extend(SweetAlertMixin, {
   toggleModal: false,
@@ -15,7 +14,7 @@ export default Controller.extend(SweetAlertMixin, {
         showCancelButton: true,
         confirmButtonText: 'Submit',
         preConfirm() {
-          return new RSVP.Promise((resolve)=> {
+          return new Promise((resolve)=> {
             sweetAlert.enableLoading();
             setTimeout(function() {
               resolve();
