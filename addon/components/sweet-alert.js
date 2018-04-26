@@ -1,7 +1,5 @@
-import Ember from 'ember';
+import Component from '@ember/component';
 import sweetAlert from '../index';
-
-const { Component, on } = Ember;
 
 export default Component.extend({
   show: true,
@@ -10,15 +8,15 @@ export default Component.extend({
   type: '',
   callback: ()=> {},
 
-  setupSweetAlert: on('didInsertElement', function() {
+  didInsertElement() {
+    this._super(...arguments);
     this._displaySweetAlert();
-  }),
+  },
 
-  updateAttrs: on('didUpdateAttrs', function() {
+  didUpdateAttrs() {
+    this._super(...arguments);
     this._displaySweetAlert();
-  }),
-
-  teardownSweetAlert: on('willDestroyElement', function() {}),
+  },
 
   _displaySweetAlert() {
     if (this.get('show')) {
