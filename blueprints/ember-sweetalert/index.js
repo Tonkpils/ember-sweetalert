@@ -2,6 +2,6 @@ module.exports = {
   normalizeEntityName: function() {},
 
   afterInstall: function() {
-    return this.addBowerPackageToProject('sweetalert2', '~6');
+    return this.addBowerPackageToProject('sweetalert2', '~7');
   }
 };

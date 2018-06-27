@@ -1,6 +1,6 @@
 {
   "name": "ember-sweetalert",
   "dependencies": {
-    "sweetalert2": "^4.3.3"
+    "sweetalert2": "^7.19.0"
   }
 }
