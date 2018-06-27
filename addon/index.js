@@ -1,2 +1,3 @@
-/* global Sweetalert2 */
-export default Sweetalert2;
+import Swal from 'sweetalert2';
+
+export default Swal;

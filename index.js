@@ -5,9 +5,8 @@ module.exports = {
 
   included: function included(app) {
     this._super.included.apply(this, arguments);
-    app.import(app.bowerDirectory + '/sweetalert2/dist/sweetalert2.js');
-    app.import(app.bowerDirectory + '/sweetalert2/dist/sweetalert2.css');
-    
-    app.import(this.treePaths.vendor + '/shims.js');
+
+    app.import(require.resolve('sweetalert2'));
+    app.import(this.treePaths.vendor + '/shims/sweetalert2.js');
   }
 };

@@ -14,7 +14,8 @@
   },
   "repository": "https://github.com/Tonkpils/ember-sweetalert",
   "dependencies": {
-    "ember-cli-babel": "^6.6.0"
+    "ember-cli-babel": "^6.6.0",
+    "sweetalert2": "^7.24.2"
   },
   "maintainers": [
     "Leo Correa <lcorr005@gmail.com>",
