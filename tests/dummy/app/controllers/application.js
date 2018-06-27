@@ -22,12 +22,12 @@ export default Controller.extend(SweetAlertMixin, {
           });
         },
         allowOutsideClick: false
-      }).then((email)=> {
-        if (email) {
+      }).then(({ value })=> {
+        if (value) {
           sweetAlert({
             type: 'success',
             title: 'Ajax request finished!',
-            html: `Submitted email: ${email}`
+            html: `Submitted email: ${value}`
           });
         }
       });
