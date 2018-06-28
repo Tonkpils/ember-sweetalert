@@ -1,10 +1,29 @@
 <h2 id="title">Welcome to Ember</h2>
 
 <a href="#" {{action 'toggle'}}>Toggle</a>
-{{sweet-alert
-show=toggleModal
-title="Ember CLI Sweet Alert"
-message="Awesome!"
-type="error"
-callback=(action 'testing')}}
 
+{{sweet-alert "Ember CLI Sweet Alert" "Awesome!" "success"
+  show=toggleModal
+  onOpen=(action (mut cancellation) null)
+  onConfirm=(action (mut enterEmail) true)
+  onCancel=(action "cancelled")
+}}
+
+{{sweet-alert
+  show=enterEmail
+  title="Submit email to run ajax request"
+  input="email"
+  showCancelButton=true
+  confirmButtonText="submit"
+  allowOutsideClick=false
+  preConfirm=(action "loading")
+  onConfirm=(action "updateEmail")
+}}
+
+{{#if cancellation}}
+  <p>Cancelled: {{cancellation}}</p>
+{{/if}}
+
+{{#if email}}
+  <p>Email: {{email}}</p>
+{{/if}}
