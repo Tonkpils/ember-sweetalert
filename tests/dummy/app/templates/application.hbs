@@ -1,8 +1,8 @@
 <h2 id="title">Welcome to Ember</h2>
 
-<a href="#" {{action 'toggle'}}>Toggle</a>
+<a class="toggle" href="#" {{action 'toggle'}}>Toggle</a>
 
-{{sweet-alert "Ember CLI Sweet Alert" "Awesome!" "success"
+{{sweet-alert "Ember Sweet Alert" "Awesome!" "success"
   show=toggleModal
   onOpen=(action (mut cancellation) null)
   onConfirm=(action (mut enterEmail) true)
@@ -25,5 +25,5 @@
 {{/if}}
 
 {{#if email}}
-  <p>Email: {{email}}</p>
+  <p class="email">Email: {{email}}</p>
 {{/if}}

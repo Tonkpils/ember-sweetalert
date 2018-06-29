@@ -1,7 +1,10 @@
 import Controller from '@ember/controller';
 import { Promise } from 'rsvp';
-import { later } from '@ember/runloop';
+import { later, next } from '@ember/runloop';
 import Swal from 'sweetalert2';
+import config from '../config/environment';
+
+const testing = 'test' === config.environment;
 
 export default Controller.extend({
   toggleModal: false,
@@ -10,7 +13,7 @@ export default Controller.extend({
     loading() {
       return new Promise(resolve => {
         Swal.enableLoading();
-        later(resolve, 2000);
+        testing ? next(null, resolve) : later(resolve, 2000);
       });
     },
 

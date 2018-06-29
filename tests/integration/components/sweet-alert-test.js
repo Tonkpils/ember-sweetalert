@@ -1,118 +1,99 @@
-import { moduleForComponent, test } from 'ember-qunit';
+import { module, test } from 'qunit';
+import { setupRenderingTest } from 'ember-qunit';
+import { render } from 'ember-test-helpers';
 import hbs from 'htmlbars-inline-precompile';
-import { find, click, waitUntil, waitFor } from 'ember-native-dom-helpers';
+import { open, confirmAndClose, cancelAndClose } from 'ember-sweetalert/test-support';
 import text from 'ember-text-test-helper';
 
-const waitForClose = function () {
-  return waitUntil(() => {
-    return !find('.swal2-container');
+module('Integration | Component | {{sweet-alert}}', function (hooks) {
+  setupRenderingTest(hooks);
+
+  test('it renders', async function (assert) {
+    await render(hbs`{{sweet-alert "Any fool can use a computer"}}`);
+
+    assert.equal(text('.swal2-title'), 'Any fool can use a computer');
+    await confirmAndClose();
   });
-};
 
-const open = async function (selector) {
-  await click(selector);
-  await waitFor('.swal2-container');
-};
+  test('it has positional params', async function (assert) {
+    await render(hbs`{{sweet-alert "The Internet?" "That thing is still around?" "question"}}`);
 
-const confirm = async function () {
-  await click('.swal2-confirm');
-  await waitForClose();
-};
+    assert.equal(text('.swal2-title'), 'The Internet?', 'title');
+    assert.equal(text('.swal2-content'), 'That thing is still around?', 'content');
+    // @todo assert type
 
-const cancel = async function () {
-  await click('.swal2-cancel');
-  await waitForClose();
-};
+    await confirmAndClose();
+  });
 
-moduleForComponent('sweet-alert', 'Integration | Component | {{sweet-alert}}', {
-  integration: true
-});
-
-test('it renders', async function (assert) {
-  this.render(hbs`{{sweet-alert "Any fool can use a computer"}}`);
-
-  assert.equal(text('.swal2-title'), 'Any fool can use a computer');
-  await confirm();
-});
-
-test('it has positional params', async function (assert) {
-  this.render(hbs`{{sweet-alert "The Internet?" "That thing is still around?" "question"}}`);
-
-  assert.equal(text('.swal2-title'), 'The Internet?', 'title');
-  assert.equal(text('.swal2-content'), 'That thing is still around?', 'content');
-  // @todo assert type
-
-  await confirm();
-});
-
-test('it has params', async function (assert) {
-  this.render(hbs`{{sweet-alert
-    title="The Internet?"
-    text="That thing is still around?"
-    type="question"
-  }}`);
-
-  assert.equal(text('.swal2-title'), 'The Internet?', 'title');
-  assert.equal(text('.swal2-content'), 'That thing is still around?', 'content');
-  // @todo assert type
-
-  await confirm();
-});
-
-test('it can be toggled', async function (assert) {
-  this.set('isOpen', false);
-  this.render(hbs`
-    {{sweet-alert
-      show=isOpen
+  test('it has params', async function (assert) {
+    await render(hbs`{{sweet-alert
       title="The Internet?"
       text="That thing is still around?"
       type="question"
-    }}
+    }}`);
 
-    <button {{action (mut isOpen) true}}>Open</button>
-  `);
+    assert.equal(text('.swal2-title'), 'The Internet?', 'title');
+    assert.equal(text('.swal2-content'), 'That thing is still around?', 'content');
+    // @todo assert type
 
-  assert.notOk(find('.swal2-container'));
-  await open('button');
-  assert.equal(text('.swal2-title'), 'The Internet?', 'title');
-  await confirm();
-});
+    await confirmAndClose();
+  });
 
-test('it has a confirm action', async function (assert) {
-  assert.expect(1);
-  this.on('confirmed', ({ value }) => assert.ok(value, 'it was confirmed'));
-  this.on('cancelled', () => assert.ok(false, 'it was cancelled'));
+  test('it can be toggled', async function (assert) {
+    this.set('isOpen', false);
+    await render(hbs`
+      {{sweet-alert
+        show=isOpen
+        title="The Internet?"
+        text="That thing is still around?"
+        type="question"
+      }}
 
-  this.render(hbs`
-    {{sweet-alert
-      title="Are you sure?"
-      text="You won't be able to revert this!"
-      type="warning"
-      showCancelButton=true
-      onConfirm=(action "confirmed")
-      onCancel=(action "cancelled")
-    }}
-  `);
+      <button {{action (mut isOpen) true}}>Open</button>
+    `);
 
-  await confirm();
-});
+    assert.notOk(find('.swal2-container'));
+    await open('button');
+    assert.equal(text('.swal2-title'), 'The Internet?', 'title');
+    await confirmAndClose();
+  });
 
-test('it has a cancel action', async function (assert) {
-  assert.expect(1);
-  this.on('confirmed', () => assert.ok(false, 'it was confirmed'));
-  this.on('cancel', ({ dismiss }) => this.set('cancellation', dismiss));
+  test('it has a confirm action', async function (assert) {
+    assert.expect(1);
+    this.set('confirmed', ({ value }) => assert.ok(value, 'it was confirmed'));
+    this.set('cancelled', () => assert.ok(false, 'it was cancelled'));
 
-  this.render(hbs`
-    {{sweet-alert
-      title="Are you sure?"
-      text="You won't be able to revert this!"
-      type="warning"
-      showCancelButton=true
-      onConfirm=(action "confirmed")
-      onCancel=(action "cancel")
-    }}
-  `);
+    await render(hbs`
+      {{sweet-alert
+        title="Are you sure?"
+        text="You won't be able to revert this!"
+        type="warning"
+        showCancelButton=true
+        onConfirm=(action confirmed)
+        onCancel=(action cancelled)
+      }}
+    `);
 
-  await cancel();
-  assert.equal(this.get('cancellation'), 'cancel');
+    await confirmAndClose();
+  });
+
+  test('it has a cancel action', async function (assert) {
+    assert.expect(1);
+    this.set('confirmed', () => assert.ok(false, 'it was confirmed'));
+    this.set('cancel', ({ dismiss }) => this.set('cancellation', dismiss));
+
+    await render(hbs`
+      {{sweet-alert
+        title="Are you sure?"
+        text="You won't be able to revert this!"
+        type="warning"
+        showCancelButton=true
+        onConfirm=(action confirmed)
+        onCancel=(action cancel)
+      }}
+    `);
+
+    await cancelAndClose();
+    assert.equal(this.get('cancellation'), 'cancel');
+  });
 });
