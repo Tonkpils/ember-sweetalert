@@ -3,8 +3,7 @@ import { getOwner } from '@ember/application';
 import { get, set, computed } from '@ember/object';
 import { A } from '@ember/array';
 import { isNone } from '@ember/utils';
-import { Promise } from 'rsvp';
-import Swal from 'sweetalert2';
+import EmberSwal from 'ember-sweetalert';
 
 const CONFIGURATION = [
   { key: 'title', value: null },
@@ -91,16 +90,16 @@ const SweetAlertComponent = Component.extend({
     if (get(this, 'show')) {
       let props = this._getValues();
 
-      new Promise(function (resolve, reject) {
-        Swal(props).then(resolve, reject);
-      }).then((result) => {
+      EmberSwal(props).then((result) => {
         if (result.value) {
           get(this, 'onConfirm')(result);
         } else {
           get(this, 'onCancel')(result);
         }
 
-        set(this, 'show', false);
+        if (!get(this, 'isDestroyed')) {
+          set(this, 'show', false);
+        }
       });
     }
   },

@@ -59,6 +59,8 @@ module('Integration | Component | {{sweet-alert}}', function (hooks) {
     assert.dom('.swal2-title').hasText('The Internet?', 'title');
     await confirmAndClose();
     assert.dom('.swal2-container').doesNotExist();
+    await open('button');
+    assert.dom('.swal2-container').exists('it can be opened a second time');
   });
 
   test('it has a confirm action', async function (assert) {
