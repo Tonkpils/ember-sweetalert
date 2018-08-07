@@ -2,7 +2,6 @@ import { module, test } from 'qunit';
 import { visit, fillIn } from '@ember/test-helpers';
 import { setupApplicationTest } from 'ember-qunit';
 import { open, confirm, confirmAndClose } from 'ember-sweetalert/test-support';
-import text from 'ember-text-test-helper';
 
 module('Acceptance | sweetalert', function(hooks) {
   setupApplicationTest(hooks);
@@ -11,12 +10,12 @@ module('Acceptance | sweetalert', function(hooks) {
     await visit('/');
     await open('.toggle');
 
-    assert.equal(text('.swal2-title'), 'Ember Sweet Alert');
+    assert.dom('.swal2-title').hasText('Ember Sweet Alert');
 
     await confirm();
     await fillIn('input[type="email"]', 'foo@example.com');
     await confirmAndClose();
 
-    assert.equal(text('.email'), 'Email: foo@example.com');
+    assert.dom('.email').hasText('Email: foo@example.com');
   });
 });

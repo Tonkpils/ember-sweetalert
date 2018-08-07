@@ -3,7 +3,6 @@ import { setupRenderingTest } from 'ember-qunit';
 import { render } from 'ember-test-helpers';
 import hbs from 'htmlbars-inline-precompile';
 import { open, confirmAndClose, cancelAndClose } from 'ember-sweetalert/test-support';
-import text from 'ember-text-test-helper';
 
 module('Integration | Component | {{sweet-alert}}', function (hooks) {
   setupRenderingTest(hooks);
@@ -11,18 +10,20 @@ module('Integration | Component | {{sweet-alert}}', function (hooks) {
   test('it renders', async function (assert) {
     await render(hbs`{{sweet-alert "Any fool can use a computer"}}`);
 
-    assert.equal(text('.swal2-title'), 'Any fool can use a computer');
+    assert.dom('.swal2-title').hasText('Any fool can use a computer');
     await confirmAndClose();
+    assert.dom('.swal2-container').doesNotExist();
   });
 
   test('it has positional params', async function (assert) {
     await render(hbs`{{sweet-alert "The Internet?" "That thing is still around?" "question"}}`);
 
-    assert.equal(text('.swal2-title'), 'The Internet?', 'title');
-    assert.equal(text('.swal2-content'), 'That thing is still around?', 'content');
+    assert.dom('.swal2-title').hasText('The Internet?', 'title');
+    assert.dom('.swal2-content').hasText('That thing is still around?', 'content');
     // @todo assert type
 
     await confirmAndClose();
+    assert.dom('.swal2-container').doesNotExist();
   });
 
   test('it has params', async function (assert) {
@@ -32,11 +33,12 @@ module('Integration | Component | {{sweet-alert}}', function (hooks) {
       type="question"
     }}`);
 
-    assert.equal(text('.swal2-title'), 'The Internet?', 'title');
-    assert.equal(text('.swal2-content'), 'That thing is still around?', 'content');
+    assert.dom('.swal2-title').hasText('The Internet?', 'title');
+    assert.dom('.swal2-content').hasText('That thing is still around?', 'content');
     // @todo assert type
 
     await confirmAndClose();
+    assert.dom('.swal2-container').doesNotExist();
   });
 
   test('it can be toggled', async function (assert) {
@@ -52,10 +54,11 @@ module('Integration | Component | {{sweet-alert}}', function (hooks) {
       <button {{action (mut isOpen) true}}>Open</button>
     `);
 
-    assert.notOk(find('.swal2-container'));
+    assert.dom('.swal2-container').doesNotExist();
     await open('button');
-    assert.equal(text('.swal2-title'), 'The Internet?', 'title');
+    assert.dom('.swal2-title').hasText('The Internet?', 'title');
     await confirmAndClose();
+    assert.dom('.swal2-container').doesNotExist();
   });
 
   test('it has a confirm action', async function (assert) {
