@@ -1,6 +1,7 @@
 <h2 id="title">Welcome to Ember</h2>
 
-<a class="toggle" href="#" {{action 'toggle'}}>Toggle</a>
+<hr>
+<a class="toggle1" href="#" {{action 'toggle'}}>Toggle</a>
 
 {{sweet-alert "Ember Sweet Alert" "Awesome!" "success"
   show=toggleModal
@@ -27,3 +28,6 @@
 {{#if email}}
   <p class="email">Email: {{email}}</p>
 {{/if}}
+
+<hr>
+<a class="toggle2" href="#" {{action "open"}}>Open via Import</a>

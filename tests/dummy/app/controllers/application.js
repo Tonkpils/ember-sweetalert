@@ -1,18 +1,20 @@
 import Controller from '@ember/controller';
+import { inject as service } from '@ember/service';
 import { Promise } from 'rsvp';
 import { later, next } from '@ember/runloop';
-import Swal from 'sweetalert2';
 import config from '../config/environment';
 
 const testing = 'test' === config.environment;
 
 export default Controller.extend({
+  swal: service('swal'),
+
   toggleModal: false,
 
   actions: {
     loading() {
       return new Promise(resolve => {
-        Swal.enableLoading();
+        this.get('swal').enableLoading();
         testing ? next(null, resolve) : later(resolve, 2000);
       });
     },
@@ -27,6 +29,10 @@ export default Controller.extend({
 
     updateEmail({ value }) {
       this.set('email', value);
+    },
+
+    open() {
+      this.get('swal').open({ title: 'Hello World!' });
     }
   }
 });
