@@ -57,9 +57,13 @@ in your environment config, e.g.:
 
 ```js
 ENV['ember-sweetalert'] = {
+  target: '#my-sweetalert',
   allowOutsideClick: false
 };
 ```
+
+> The `target` option can only be set in environment config. It cannot be
+set as an attribute on the `sweet-alert` component.
 
 #### Opening
 
@@ -133,25 +137,49 @@ export default Controller.extend({
 
 ### In your code
 
+#### Service
+
+The recommended way to use SweetAlert in your code is to inject the `swal`
+service and use the `open` method. The service ensures your default
+SweetAlert config is used, plus integrates with the Ember run loop.
+
+Here is an example:
+
+```js
+import Component from '@ember/component';
+import { inject as service } from '@ember/service';
+
+export default Component.extend({
+  swal: service(),
+
+  actions: {
+    confirm() {
+      this.get('swal').open({
+        title: 'Are you sure?',
+        showCancelButton: true
+      }).then(({ value }) => {
+        if (value) {
+          this.get('model').destroyRecord();
+        }
+      });
+    }
+  }
+});
+```
+
+The service also exposes the [SweetAlert methods](https://sweetalert2.github.io/#methods),
+scheduling any action methods on the Ember run loop.
+
 #### Import it
 
-You can import SweetAlert easily with:
+If you really need to you can import SweetAlert easily with:
 
 ```js
 import Swal from 'sweetalert2';
 ```
 
-We also provide an import that wraps opening a SweetAlert in an RSVP promise,
-so that it is Ember run-loop aware. This can be imported from `ember-sweetalert`.
-For example:
-
-```js
-import EmberSwal from 'ember-sweetalert2';
-
-EmberSwal('Hello World').then(function () {
-  // ...
-});
-```
+> Using SweetAlert directly as an import will not have your default settings
+and will not be run-loop aware.
 
 ### In your tests
 
