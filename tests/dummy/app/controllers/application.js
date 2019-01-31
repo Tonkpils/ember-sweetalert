@@ -1,39 +1,38 @@
 import Controller from '@ember/controller';
+import { inject as service } from '@ember/service';
 import { Promise } from 'rsvp';
-import SweetAlertMixin from 'ember-sweetalert/mixins/sweetalert-mixin';
+import { later, next } from '@ember/runloop';
+import config from '../config/environment';
 
-export default Controller.extend(SweetAlertMixin, {
+const testing = 'test' === config.environment;
+
+export default Controller.extend({
+  swal: service('swal'),
+
   toggleModal: false,
 
   actions: {
-    testing() {
-      let sweetAlert = this.get('sweetAlert');
-      sweetAlert({
-        title: 'Submit email to run ajax request',
-        input: 'email',
-        showCancelButton: true,
-        confirmButtonText: 'Submit',
-        preConfirm() {
-          return new Promise((resolve)=> {
-            sweetAlert.enableLoading();
-            setTimeout(function() {
-              resolve();
-            }, 2000);
-          });
-        },
-        allowOutsideClick: false
-      }).then(({ value })=> {
-        if (value) {
-          sweetAlert({
-            type: 'success',
-            title: 'Ajax request finished!',
-            html: `Submitted email: ${value}`
-          });
-        }
+    loading() {
+      return new Promise(resolve => {
+        this.get('swal').enableLoading();
+        testing ? next(null, resolve) : later(resolve, 2000);
       });
     },
+
+    cancelled({ dismiss }) {
+      this.set('cancellation', dismiss);
+    },
+
     toggle() {
       this.set('toggleModal', true);
+    },
+
+    updateEmail({ value }) {
+      this.set('email', value);
+    },
+
+    open() {
+      this.get('swal').open({ title: 'Hello World!' });
     }
   }
 });
