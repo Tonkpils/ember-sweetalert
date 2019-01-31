@@ -2,15 +2,16 @@
 
 An [ember-cli](http://www.ember-cli.com/) addon for using [SweetAlert2](https://limonte.github.io/sweetalert2/) in Ember applications.
 
-## Installation
-
-In your application's directory:
+Installation
+------------------------------------------------------------------------------
 
 ```
-ember install ember-sweetalert
+ember install my-addon
 ```
 
-## Usage
+
+Usage
+------------------------------------------------------------------------------
 
 ### In your templates
 
@@ -236,14 +237,7 @@ module('Acceptance | join mailing list', function(hooks) {
 });
 ```
 
-## Running Tests
+License
+------------------------------------------------------------------------------
 
-* `npm test` (Runs `ember try:testall` to test your addon against multiple Ember versions)
-* `ember test`
-* `ember test --server`
-
-## Building
-
-* `ember build`
-
-For more information on using ember-cli, visit [http://ember-cli.com/](http://ember-cli.com/).
+This project is licensed under the [MIT License](LICENSE.md).
