@@ -1,6 +1,6 @@
 {
   "name": "ember-sweetalert",
-  "version": "0.1.1",
+  "version": "1.0.0-rc.1",
   "description": "Ember Sweet Alerts with SweetAlert2",
   "scripts": {
     "build": "ember build",
