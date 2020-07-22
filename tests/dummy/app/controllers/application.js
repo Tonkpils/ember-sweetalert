@@ -40,8 +40,18 @@ export default class ApplicationController extends Controller {
   }
 
   @action
+  closeModal() {
+    this.toggleModal = false;
+  }
+
+  @action
   openEmail() {
     this.enterEmail = true;
+  }
+
+  @action
+  closeEmail() {
+    this.enterEmail = false;
   }
 
   @action

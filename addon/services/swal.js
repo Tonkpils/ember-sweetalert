@@ -1,6 +1,6 @@
 import Service from '@ember/service';
 import { getOwner } from '@ember/application';
-import { get, computed } from '@ember/object';
+import { computed } from '@ember/object';
 import { scheduleOnce } from '@ember/runloop';
 import { Promise } from 'rsvp';
 import Swal from 'sweetalert2';
@@ -12,13 +12,13 @@ export default Service.extend({
     return config['ember-sweetalert'] || {};
   }),
 
-  sweetAlert: computed(function () {
-    return Swal.mixin(get(this, 'config'));
+  sweetAlert: computed('config', function () {
+    return Swal.mixin(this.config);
   }),
 
   open(...args) {
     return new Promise((resolve, reject) => {
-      get(this, 'sweetAlert')(...args).then(resolve, reject);
+      this.sweetAlert(...args).then(resolve, reject);
     });
   },
 
@@ -27,7 +27,7 @@ export default Service.extend({
   },
 
   mixin(params) {
-    return get(this, 'sweetAlert').mixin(params);
+    return this.sweetAlert.mixin(params);
   },
 
   getTitle() {

@@ -11,6 +11,7 @@
   @show={{this.toggleModal}}
   @onOpen={{this.reset}}
   @onConfirm={{this.openEmail}}
+  @onClose={{this.closeModal}}
 />
 
 <SweetAlert
@@ -23,6 +24,7 @@
   @preConfirm={{this.loading}}
   @onConfirm={{this.updateEmail}}
   @onCancel={{this.cancelled}}
+  @onClose={{this.closeEmail}}
 />
 
 {{#if this.cancellation}}

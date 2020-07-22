@@ -7,6 +7,7 @@ project adheres to [Semantic Versioning](http://semver.org/) and
 ## Unreleased
 
 ### Changed
+- **BREAKING:** Sweet Alert component no longer supports positional parameters.
 - Minimum Ember version is now `3.16`.
 
 ## [1.0.0] - 2020-07-22
