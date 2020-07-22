@@ -6,13 +6,12 @@ import { Promise } from 'rsvp';
 import Swal from 'sweetalert2';
 
 export default class SweetAlertService extends Service {
-  get config() {
-    let config = (getOwner(this).resolveRegistration('config:environment') || {});
-    return config['ember-sweetalert'] || {};
-  }
+  sweetAlert;
 
-  get sweetAlert() {
-    return Swal.mixin(this.config);
+  constructor() {
+    super(...arguments);
+    let config = (getOwner(this).resolveRegistration('config:environment') || {});
+    this.sweetAlert = Swal.mixin(config['ember-sweetalert'] || {});
   }
 
   fire(...args) {
@@ -31,7 +30,7 @@ export default class SweetAlertService extends Service {
   }
 
   isVisible() {
-    return Swal.isVisible();
+    return this.sweetAlert.isVisible();
   }
 
   mixin(params) {
@@ -39,7 +38,7 @@ export default class SweetAlertService extends Service {
   }
 
   update(params) {
-    return Swal.update(params);
+    return this.sweetAlert.update(params);
   }
 
   close() {
@@ -47,51 +46,51 @@ export default class SweetAlertService extends Service {
   }
 
   getContainer() {
-    return Swal.getContainer();
+    return this.sweetAlert.getContainer();
   }
 
   getHeader() {
-    return Swal.getHeader();
+    return this.sweetAlert.getHeader();
   }
 
   getTitle() {
-    return Swal.getTitle();
+    return this.sweetAlert.getTitle();
   }
 
   getProgressSteps() {
-    return Swal.getProgressSteps();
+    return this.sweetAlert.getProgressSteps();
   }
 
   getCloseButton() {
-    return Swal.getCloseButton();
+    return this.sweetAlert.getCloseButton();
   }
 
   getContent() {
-    return Swal.getContent();
+    return this.sweetAlert.getContent();
   }
 
   getImage() {
-    return Swal.getImage();
+    return this.sweetAlert.getImage();
   }
 
   getActions() {
-    return Swal.getActions();
+    return this.sweetAlert.getActions();
   }
 
   getFooter() {
-    return Swal.getFooter();
+    return this.sweetAlert.getFooter();
   }
 
   getFocusableElements() {
-    return Swal.getFocusableElements();
+    return this.sweetAlert.getFocusableElements();
   }
 
   getConfirmButton() {
-    return Swal.getConfirmButton();
+    return this.sweetAlert.getConfirmButton();
   }
 
   getCancelButton() {
-    return Swal.getCancelButton();
+    return this.sweetAlert.getCancelButton();
   }
 
   enableButtons() {
@@ -119,31 +118,31 @@ export default class SweetAlertService extends Service {
   }
 
   isLoading() {
-    return Swal.isLoading();
+    return this.sweetAlert.isLoading();
   }
 
   getTimerLeft() {
-    return Swal.getTimerLeft();
+    return this.sweetAlert.getTimerLeft();
   }
 
   stopTimer() {
-    return Swal.stopTimer();
+    return this.sweetAlert.stopTimer();
   }
 
   resumeTimer() {
-    return Swal.resumeTimer();
+    return this.sweetAlert.resumeTimer();
   }
 
   toggleTimer() {
-    return Swal.toggleTimer();
+    return this.sweetAlert.toggleTimer();
   }
 
   isTimerRunning() {
-    return Swal.isTimerRunning();
+    return this.sweetAlert.isTimerRunning();
   }
 
   increaseTimer(n) {
-    return Swal.increaseTimer(n);
+    return this.sweetAlert.increaseTimer(n);
   }
 
   clickConfirm() {
@@ -155,7 +154,7 @@ export default class SweetAlertService extends Service {
   }
 
   getInput() {
-    return Swal.getInput();
+    return this.sweetAlert.getInput();
   }
 
   disableInput() {
@@ -183,7 +182,7 @@ export default class SweetAlertService extends Service {
   }
 
   getQueueStep() {
-    return Swal.getQueueStep();
+    return this.sweetAlert.getQueueStep();
   }
 
   insertQueueStep() {
@@ -195,14 +194,14 @@ export default class SweetAlertService extends Service {
   }
 
   isValidParameter(param) {
-    return Swal.isValidParameter(param);
+    return this.sweetAlert.isValidParameter(param);
   }
 
   isUpdatableParameter(param) {
-    return Swal.isUpdatableParameter(param);
+    return this.sweetAlert.isUpdatableParameter(param);
   }
 
   _run(method, ...args) {
-    scheduleOnce('afterRender', Swal, method, ...args);
+    scheduleOnce('afterRender', this.sweetAlert, method, ...args);
   }
 }
