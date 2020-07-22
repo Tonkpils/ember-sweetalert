@@ -2,7 +2,7 @@ Ember Sweet Alert
 ==============================================================================
 
 An [ember-cli](http://www.ember-cli.com/) addon for using
-[SweetAlert2](https://limonte.github.io/sweetalert2/) in Ember applications.
+[SweetAlert2](https://sweetalert2.github.io/) in Ember applications.
 
 Compatibility
 ------------------------------------------------------------------------------
