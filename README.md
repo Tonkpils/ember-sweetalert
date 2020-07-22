@@ -1,6 +1,15 @@
-# Ember Sweet Alert
+Ember Sweet Alert
+==============================================================================
 
-An [ember-cli](http://www.ember-cli.com/) addon for using [SweetAlert2](https://limonte.github.io/sweetalert2/) in Ember applications.
+An [ember-cli](http://www.ember-cli.com/) addon for using
+[SweetAlert2](https://limonte.github.io/sweetalert2/) in Ember applications.
+
+Compatibility
+------------------------------------------------------------------------------
+
+* Ember.js v3.12 or above
+* Ember CLI v2.13 or above
+* Node.js v10 or above
 
 Installation
 ------------------------------------------------------------------------------
@@ -250,6 +259,12 @@ module('Acceptance | join mailing list', function(hooks) {
   });
 });
 ```
+
+Contributing
+------------------------------------------------------------------------------
+
+See the [Contributing](CONTRIBUTING.md) guide for details.
+
 
 License
 ------------------------------------------------------------------------------
