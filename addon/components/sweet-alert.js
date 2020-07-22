@@ -12,6 +12,7 @@ const CONFIGURATION = [
   'footer',
   'backdrop',
   'toast',
+  'target',
   'input',
   'width',
   'padding',
