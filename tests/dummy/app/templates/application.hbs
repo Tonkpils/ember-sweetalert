@@ -4,14 +4,14 @@
 <a class="toggle1" href="#" {{action "toggle"}}>Toggle</a>
 
 {{sweet-alert "Ember Sweet Alert" "Awesome!" "success"
-  show=toggleModal
-  onOpen=(action (mut cancellation) null)
-  onConfirm=(action (mut enterEmail) true)
+  show=this.toggleModal
+  onOpen=(action (mut this.cancellation) null)
+  onConfirm=(action (mut this.enterEmail) true)
   onCancel=(action "cancelled")
 }}
 
 {{sweet-alert
-  show=enterEmail
+  show=this.enterEmail
   title="Submit email to run ajax request"
   input="email"
   showCancelButton=true
@@ -21,12 +21,12 @@
   onConfirm=(action "updateEmail")
 }}
 
-{{#if cancellation}}
-  <p>Cancelled: {{cancellation}}</p>
+{{#if this.cancellation}}
+  <p>Cancelled: {{this.cancellation}}</p>
 {{/if}}
 
-{{#if email}}
-  <p class="email">Email: {{email}}</p>
+{{#if this.email}}
+  <p class="email">Email: {{this.email}}</p>
 {{/if}}
 
 <hr>
