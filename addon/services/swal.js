@@ -58,6 +58,10 @@ export default class SweetAlertService extends Service {
     return Swal.getTitle();
   }
 
+  getProgressSteps() {
+    return Swal.getProgressSteps();
+  }
+
   getCloseButton() {
     return Swal.getCloseButton();
   }
@@ -96,14 +100,6 @@ export default class SweetAlertService extends Service {
 
   disableButtons() {
     this._run('disableButtons');
-  }
-
-  enableConfirmButton() {
-    this._run('enableConfirmButton');
-  }
-
-  disableConfirmButton() {
-    this._run('disableConfirmButton');
   }
 
   showLoading() {
@@ -196,22 +192,6 @@ export default class SweetAlertService extends Service {
 
   deleteQueueStep(index) {
     this._run('deleteQueueStep', index);
-  }
-
-  getProgressSteps() {
-    return Swal.getProgressSteps();
-  }
-
-  setProgressSteps() {
-    this._run('setProgressSteps', ...arguments);
-  }
-
-  showProgressSteps() {
-    this._run('showProgressSteps');
-  }
-
-  hideProgressSteps() {
-    this._run('hideProgressSteps');
   }
 
   isValidParameter(param) {

@@ -22,15 +22,16 @@ module('Integration | Component | sweet-alert', function (hooks) {
       <SweetAlert
         @title="The Internet?"
         @text="That thing is still around?"
-        @type="question"
+        @icon="question"
       />
     `);
 
     assert.dom('.swal2-title').hasText('The Internet?', 'title');
     assert.dom('.swal2-content').hasText('That thing is still around?', 'content');
-    // @todo assert type
+    assert.dom('.swal2-icon.swal2-question').hasClass('swal2-icon-show');
 
     await confirmAndClose();
+
     assert.dom('.swal2-container').doesNotExist();
   });
 
@@ -42,7 +43,7 @@ module('Integration | Component | sweet-alert', function (hooks) {
         @show={{this.isOpen}}
         @title="The Internet?"
         @text="That thing is still around?"
-        @type="question"
+        @icon="question"
         @onClose={{action (mut this.isOpen) false}}
       />
 
@@ -67,7 +68,7 @@ module('Integration | Component | sweet-alert', function (hooks) {
       <SweetAlert
         @title="Are you sure?"
         @text="You won't be able to revert this!"
-        @type="warning"
+        @icon="warning"
         @showCancelButton={{true}}
         @onConfirm={{this.confirmed}}
         @onCancel={{this.cancelled}}
@@ -85,7 +86,7 @@ module('Integration | Component | sweet-alert', function (hooks) {
       <SweetAlert
         @title="Are you sure?"
         @text="You won't be able to revert this!"
-        @type="warning"
+        @icon="warning"
         @showCancelButton={{true}}
         @onConfirm={{action this.confirmed}}
         @onCancel={{action this.cancel}}

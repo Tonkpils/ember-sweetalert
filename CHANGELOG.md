@@ -7,7 +7,8 @@ project adheres to [Semantic Versioning](http://semver.org/) and
 ## [2.0.0] - Unreleased
 
 ### Changed
-- **BREAKING:** Upgrade Sweet Alert to from `7.33` to `8.19`.
+- **BREAKING:** Upgrade Sweet Alert to from `7.33` to `9.17`.
+  - [v8 to v9 Upgrade Guide](https://github.com/sweetalert2/sweetalert2/releases/tag/v9.0.0)
   - [v7 to v8 Upgrade Guide](https://github.com/sweetalert2/sweetalert2/releases/tag/v8.0.0)
 - **BREAKING:** Sweet Alert component no longer supports positional parameters.
 - **BREAKING:** The Sweet Alert component now follows the DDAU pattern. This means
