@@ -43,19 +43,7 @@ Usage
 The `sweet-alert` component allows setting SweetAlert's attributes.
 
 ```hbs
-{{sweet-alert "Hello World"}}
-```
-
-Just like Sweet Alert, the component supports three positional params:
-
-- Title
-- Text
-- Type
-
-For example:
-
-```hbs
-{{sweet-alert "Hello World" "Welcome to our website." "success"}}
+<SweetAlert @title="Hello World" />
 ```
 
 By default the alert will be open as soon as the template is rendered. See below
@@ -64,16 +52,16 @@ for controlling whether the alert is open.
 #### Configuration
 
 All Sweet Alert options [Sweet Alert configuration options](https://sweetalert2.github.io/#configuration)
-can also be passed in as attributes:
+can also be passed in as arguments:
 
 ```hbs
-{{sweet-alert
-  title="Hello World"
-  text="Welcome to our website."
-  type="success"
-  footer="Nothing else to say."
-  allowOutsideClick=false
-}}
+<SweetAlert
+  @title="Hello World"
+  @text="Welcome to our website."
+  @icon="success"
+  @footer="Nothing else to say."
+  @allowOutsideClick={{false}}
+/>
 ```
 
 If there are defaults that you want to set for every alert, you can set these
@@ -86,9 +74,6 @@ ENV['ember-sweetalert'] = {
 };
 ```
 
-> The `target` option can only be set in environment config. It cannot be
-set as an attribute on the `sweet-alert` component.
-
 #### Opening
 
 By default the alert will be open when the component is rendered. To control
@@ -97,24 +82,48 @@ a button is clicked:
 
 ```hbs
 {{! sayHello === false to start }}
-{{sweet-alert
-  show=sayHello
-  title="Hello World"
-  text="Welcome to our website."
-  type="success"
-}}
+<SweetAlert
+  @show={{this.sayHello}}
+  @title="Hello World"
+  @text="Welcome to our website."
+  @icon="success"
+/>
 
 <button {{action (mut sayHello) true}}>Click Me</button>
 ```
 
-Once closed, the alert can be re-opened by clicking the button again.
+The Sweet Alert component follows the Data-Down, Action Up (DDAU) pattern.
+This means in the example above, the alert will only show once, as `sayHello` will remain
+`true` once the alert is closed. To allow an alert to be open/closed any number
+of times, use an action to set the show variable back to false once the alert is
+closed. For example:
+
+```hbs
+{{! sayHello === false to start }}
+<SweetAlert
+  @show={{this.sayHello}}
+  @title="Hello World"
+  @text="Welcome to our website."
+  @icon="success"
+  @onClose={{action (mut this.sayHello) false}}
+/>
+
+<button {{action (mut this.sayHello) true}}>Click Me</button>
+```
 
 #### Actions
 
-The component can be supplied with two actions:
+The component supports all the Sweet Alert actions allowed via configuration:
+  - `onBeforeOpen`
+  - `onOpen`
+  - `onRender`
+  - `onClose`
+  - `onAfterClose`
+  - `onDestroy`
 
-- `onConfirm`: invoked if the user clicks the confirm button within the alert.
-- `onCancel`: invoked if the user closes the alert without confirmation.
+In addition, the component also supports the following two actions:
+  - `onConfirm`: invoked if the user clicks the confirm button within the alert.
+  - `onCancel`: invoked if the user closes the alert without confirmation.
 
 Both actions receive the return value from Sweet Alert.
 
@@ -122,41 +131,71 @@ The following example collects an email from a user, giving them a different
 message based on whether they provided the email or cancelled:
 
 ```js
-export default Controller.extend({
-  actions: {
-    join({ value }) {
-      this.set('email', value);
-      this.set('sayThankYou', true);
-    }
+import Component from '@glimmer/component';
+import { tracked } from '@glimmer/tracking';
+import { action } from '@ember/object';
+
+export default class JoinMailingListComponent extends Component {
+  @tracked enterEmail = false;
+  @tracked email;
+  @tracked sayThankYou = false;
+  @tracked didNotJoin = false;
+
+  @action
+  collectEmail() {
+    this.enterEmail = true;
   }
-});
+
+  @action
+  join({ value }) {
+    this.email = value;
+    this.enterEmail = false;
+    this.sayThankYou = true;
+  }
+
+  @action
+  didCancel() {
+    this.enterEmail = false;
+    this.didNotJoin = true;
+  }
+
+  @action
+  reset() {
+    this.enterEmail = false;
+    this.email = null;
+    this.sayThankYou = false;
+    this.didNotJoin = false;
+  }
+}
 ```
 
 ```hbs
-<button {{action (mut enterEmail true)}}>Join Mailing List</button>
+<button {{on "click" this.collectEmail}}>Join Mailing List</button>
 
-{{sweet-alert
-  show=enterEmail
-  title="Submit email to join our mailing list"
-  input="email"
-  showCancelButton=true
-  confirmButtonText="Join"
-  onConfirm=(action "join")
-  onCancel=(action (mut didNotJoin) true)
-}}
+<SweetAlert
+  @show={{this.enterEmail}}
+  @title="Submit email to join our mailing list"
+  @input="email"
+  @showCancelButton={{true}}
+  @confirmButtonText="Join"
+  @onConfirm={{this.join}}
+  @onCancel={{this.didCancel}}
+/>
 
-{{sweet-alert
-  show=sayThankYou
-  title="Thank You!"
-  text="You are now on our mailing list."
-  type="success"
-}}
+<SweetAlert
+  @show={{this.sayThankYou}}
+  @title="Thank You!"
+  @text="You are now on our mailing list."
+  @icon="success"
+  @onClose={{this.reset}}
+/>
 
-{{sweet-alert
-  show=didNotJoin
-  title=":-("
-  text="Ok, we won't add you to our mailing list."
-}}
+<SweetAlert
+  @show={{this.didNotJoin}}
+  @title=":-("
+  @text="Ok, we won't add you to our mailing list."
+  @onClose={{this.reset}}
+/>
 ```
 
 ### In your code
@@ -164,7 +203,7 @@ export default Controller.extend({
 #### Service
 
 The recommended way to use SweetAlert in your code is to inject the `swal`
-service and use the `open` method. The service ensures your default
+service and use the `fire` method. The service ensures your default
 SweetAlert config is used, plus integrates with the Ember run loop.
 
 Here is an example:
@@ -172,23 +211,23 @@ Here is an example:
 ```js
 import Component from '@ember/component';
 import { inject as service } from '@ember/service';
+import { action } from '@ember/object';
 
-export default Component.extend({
-  swal: service(),
+export default class DeleteModelComponent extends Component {
+  @service swal;
 
-  actions: {
-    confirm() {
-      this.swal.fire({
-        title: 'Are you sure?',
-        showCancelButton: true
-      }).then(({ value }) => {
-        if (value) {
-          this.get('model').destroyRecord();
-        }
-      });
+  @action
+  async confirm() {
+    let { value } = await this.swal.fire({
+      title: 'Are you sure?',
+      showCancelButton: true
+    });
+
+    if (value) {
+      this.args.model.destroyRecord();
     }
   }
-});
+}
 ```
 
 The service also exposes the [SweetAlert methods](https://sweetalert2.github.io/#methods),
@@ -222,8 +261,8 @@ if (environment === 'test') {
 
 #### Test Helpers
 
-This addon provides a number of test helpers for use with the new Ember testing
-API for Ember ^3.0. Test helpers can be used in acceptance or rendering tests.
+This addon provides a number of test helpers that can be used in acceptance or
+rendering tests.
 
 Test helpers can be imported from `ember-sweetalert/test-support`. The
 available helpers are:

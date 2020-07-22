@@ -13,7 +13,8 @@ project adheres to [Semantic Versioning](http://semver.org/) and
 - **BREAKING:** Sweet Alert component no longer supports positional parameters.
 - **BREAKING:** The Sweet Alert component now follows the DDAU pattern. This means
 that the `onClose` action must be used in conjunction with the `show` attribute
-to ensure the show value is toggled between true/false.
+to ensure the show value is toggled between true/false. There is an
+[example in the readme document](./README.md#Opening).
 - Minimum Ember version is now `3.16`.
 
 ### Deprecated
