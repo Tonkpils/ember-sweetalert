@@ -1,6 +1,6 @@
-import Component from '@ember/component';
+import Component from '@glimmer/component';
 import { inject as service } from '@ember/service';
-import { get, set } from '@ember/object';
+import { action } from '@ember/object';
 import { A } from '@ember/array';
 
 const CONFIGURATION = [
@@ -8,10 +8,14 @@ const CONFIGURATION = [
   'titleText',
   'html',
   'text',
-  'type',
+  'icon',
+  'iconHtml',
+  'showClass',
+  'hideClass',
   'footer',
   'backdrop',
   'toast',
+  'target',
   'input',
   'width',
   'padding',
@@ -19,8 +23,8 @@ const CONFIGURATION = [
   'position',
   'grow',
   'customClass',
-  'customContainerClass',
   'timer',
+  'timerProgressBar',
   'animation',
   'heightAuto',
   'allowOutsideClick',
@@ -34,8 +38,6 @@ const CONFIGURATION = [
   'cancelButtonText',
   'confirmButtonColor',
   'cancelButtonColor',
-  'confirmButtonClass',
-  'cancelButtonClass',
   'confirmButtonAriaLabel',
   'cancelButtonAriaLabel',
   'buttonsStyling',
@@ -43,14 +45,15 @@ const CONFIGURATION = [
   'focusConfirm',
   'focusCancel',
   'showCloseButton',
+  'closeButtonHtml',
   'closeButtonAriaLabel',
   'showLoaderOnConfirm',
+  'scrollbarPadding',
   'preConfirm',
   'imageUrl',
   'imageWidth',
   'imageHeight',
   'imageAlt',
-  'imageClass',
   'inputPlaceholder',
   'inputValue',
   'inputOptions',
@@ -58,68 +61,62 @@ const CONFIGURATION = [
   'inputAttributes',
   'inputValidator',
   'validationMessage',
-  'inputClass',
   'progressSteps',
   'currentProgressStep',
   'progressStepsDistance',
-  'onBeforeOpen',
-  'onOpen',
-  'onClose',
-  'onAfterClose',
 ];
 
-const SweetAlertComponent = Component.extend({
-  swal: service(),
+const EVENTS = [
+  'onBeforeOpen',
+  'onOpen',
+  'onRender',
+  'onClose',
+  'onAfterClose',
+  'onDestroy',
+];
 
-  show: true,
-  onConfirm: () => {},
-  onCancel: () => {},
+export default class SweetAlertComponent extends Component {
+  @service swal;
 
-  didInsertElement() {
-    this._super(...arguments);
-    this._displaySweetAlert();
-  },
-
-  didUpdateAttrs() {
-    this._super(...arguments);
-    this._displaySweetAlert();
-  },
-
-  _displaySweetAlert() {
-    if (get(this, 'show')) {
-      let props = this._getValues();
-
-      get(this, 'swal').open(props).then((result) => {
-        if (result.value) {
-          get(this, 'onConfirm')(result);
-        } else {
-          get(this, 'onCancel')(result);
-        }
-
-        if (!get(this, 'isDestroyed')) {
-          set(this, 'show', false);
-        }
-      });
+  get isOpen() {
+    if (undefined === this.args.show) {
+      return true;
     }
-  },
 
-  _getValues() {
+    return this.args.show;
+  }
+
+  @action async fire() {
+    let result = await this.swal.fire(this._values());
+
+    if (result.value) {
+      this._call('onConfirm', result);
+    } else {
+      this._call('onCancel', result);
+    }
+  }
+
+  _call(method, ...args) {
+    if (!this.isDestroying && this.args[method]) {
+      this.args[method](...args);
+    }
+  }
+
+  _values() {
     let props = {};
 
     A(CONFIGURATION).forEach(key => {
-      let value = get(this, key);
+      let value = this.args[key];
 
       if (undefined !== value) {
         props[key] = value;
       }
     });
 
+    A(EVENTS).forEach(key => {
+      props[key] = () => this._call(key, ...arguments);
+    });
+
     return props;
   }
-});
-
-SweetAlertComponent.reopenClass({
-  positionalParams: ['title', 'text', 'type']
-});
-
-export default SweetAlertComponent;
+}

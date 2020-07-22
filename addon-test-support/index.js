@@ -10,8 +10,8 @@ const SWAL_CANCEL = '.swal2-cancel';
  * @public
  * @return {Promise<void>} resolves when settled.
  */
-export function waitForOpen() {
-  return waitFor(SWAL_CONTAINER);
+export async function waitForOpen() {
+  await waitFor(SWAL_CONTAINER);
 }
 
 /**
@@ -20,8 +20,8 @@ export function waitForOpen() {
  * @public
  * @return {Promise<void>} resolves when settled.
  */
-export function waitForClose() {
-  return waitUntil(() => {
+export async function waitForClose() {
+  await waitUntil(() => {
     return !find(SWAL_CONTAINER);
   });
 }
@@ -33,10 +33,9 @@ export function waitForClose() {
  * @param {string|Element} target the element or selector to click on.
  * @return {Promise<void>} resolves when settled.
  */
-export function open(target) {
-  return click(target).then(() => {
-    return waitForOpen();
-  });
+export async function open(target) {
+  await click(target);
+  await waitForOpen();
 }
 
 /**
@@ -45,8 +44,8 @@ export function open(target) {
  * @public
  * @return {Promise<void>} resolves when settled.
  */
-export function confirm() {
-  return click(SWAL_CONFIRM);
+export async function confirm() {
+  await click(SWAL_CONFIRM);
 }
 
 /**
@@ -55,10 +54,9 @@ export function confirm() {
  * @public
  * @return {Promise<void>} resolves when settled.
  */
-export function confirmAndClose() {
-  return confirm().then(() => {
-    return waitForClose();
-  });
+export async function confirmAndClose() {
+  await confirm();
+  await waitForClose();
 }
 
 /**
@@ -67,8 +65,8 @@ export function confirmAndClose() {
  * @public
  * @return {Promise<void>} resolves when settled.
  */
-export function cancel() {
-  return click(SWAL_CANCEL);
+export async function cancel() {
+  await click(SWAL_CANCEL);
 }
 
 /**
@@ -77,8 +75,7 @@ export function cancel() {
  * @public
  * @return {Promise<void>} resolves when settled.
  */
-export function cancelAndClose() {
-  return cancel().then(() => {
-    return waitForClose();
-  });
+export async function cancelAndClose() {
+  await cancel();
+  await waitForClose();
 }

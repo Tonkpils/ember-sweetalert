@@ -1,38 +1,66 @@
 import Controller from '@ember/controller';
 import { inject as service } from '@ember/service';
-import { Promise } from 'rsvp';
+import { tracked } from '@glimmer/tracking';
+import { action } from '@ember/object';
 import { later, next } from '@ember/runloop';
+import { Promise } from 'rsvp';
 import config from '../config/environment';
 
-const testing = 'test' === config.environment;
+const TESTING = 'test' === config.environment;
 
-export default Controller.extend({
-  swal: service('swal'),
+export default class ApplicationController extends Controller {
+  @service swal;
+  @tracked toggleModal = false;
+  @tracked enterEmail = false;
+  @tracked cancellation = null;
+  @tracked email = null;
 
-  toggleModal: false,
-
-  actions: {
-    loading() {
-      return new Promise(resolve => {
-        this.get('swal').enableLoading();
-        testing ? next(null, resolve) : later(resolve, 2000);
-      });
-    },
-
-    cancelled({ dismiss }) {
-      this.set('cancellation', dismiss);
-    },
-
-    toggle() {
-      this.set('toggleModal', true);
-    },
-
-    updateEmail({ value }) {
-      this.set('email', value);
-    },
-
-    open() {
-      this.get('swal').open({ title: 'Hello World!' });
-    }
+  @action
+  reset() {
+    this.cancellation = null;
+    this.email = null;
   }
-});
+
+  @action
+  loading() {
+    return new Promise(resolve => {
+      this.swal.enableLoading();
+      TESTING ? next(null, resolve) : later(resolve, 2000);
+    });
+  }
+
+  @action
+  cancelled({ dismiss }) {
+    this.cancellation = dismiss;
+  }
+
+  @action
+  openModal() {
+    this.toggleModal = true;
+  }
+
+  @action
+  closeModal() {
+    this.toggleModal = false;
+  }
+
+  @action
+  openEmail() {
+    this.enterEmail = true;
+  }
+
+  @action
+  closeEmail() {
+    this.enterEmail = false;
+  }
+
+  @action
+  updateEmail({ value }) {
+    this.email = value;
+  }
+
+  @action
+  open() {
+    this.swal.open({ title: 'Hello World!' });
+  }
+}

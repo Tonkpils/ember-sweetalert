@@ -4,6 +4,23 @@ All notable changes to this project will be documented in this file. This
 project adheres to [Semantic Versioning](http://semver.org/) and
 [this changelog format](http://keepachangelog.com/).
 
+## [2.0.0] - Unreleased
+
+### Changed
+- **BREAKING:** Upgrade Sweet Alert to from `7.33` to `9.17`.
+  - [v8 to v9 Upgrade Guide](https://github.com/sweetalert2/sweetalert2/releases/tag/v9.0.0)
+  - [v7 to v8 Upgrade Guide](https://github.com/sweetalert2/sweetalert2/releases/tag/v8.0.0)
+- **BREAKING:** Sweet Alert component no longer supports positional parameters.
+- **BREAKING:** The Sweet Alert component now follows the DDAU pattern. This means
+that the `onClose` action must be used in conjunction with the `show` attribute
+to ensure the show value is toggled between true/false. There is an
+[example in the readme document](./README.md#Opening).
+- Minimum Ember version is now `3.16`.
+
+### Deprecated
+- The `SweetAlertService.open()` method is deprecated in favour of
+`SweetAlertService.fire()`, and will be removed in `3.0`.
+
 ## [1.1.0] - 2020-07-22
 
 ### Added

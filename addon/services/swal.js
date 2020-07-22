@@ -1,216 +1,207 @@
 import Service from '@ember/service';
 import { getOwner } from '@ember/application';
-import { get, computed } from '@ember/object';
 import { scheduleOnce } from '@ember/runloop';
+import { deprecate } from '@ember/debug';
 import { Promise } from 'rsvp';
 import Swal from 'sweetalert2';
 
-export default Service.extend({
-  config: computed(function () {
+export default class SweetAlertService extends Service {
+  sweetAlert;
+
+  constructor() {
+    super(...arguments);
     let config = (getOwner(this).resolveRegistration('config:environment') || {});
+    this.sweetAlert = Swal.mixin(config['ember-sweetalert'] || {});
+  }
 
-    return config['ember-sweetalert'] || {};
-  }),
-
-  sweetAlert: computed(function () {
-    return Swal.mixin(get(this, 'config'));
-  }),
-
-  open(...args) {
+  fire(...args) {
     return new Promise((resolve, reject) => {
-      get(this, 'sweetAlert')(...args).then(resolve, reject);
+      this.sweetAlert.fire(...args).then(resolve, reject);
     });
-  },
+  }
+
+  open() {
+    deprecate('SweetAlertService.open() is deprecated: use SweetAlertService.fire() instead.', false, {
+      id: 'ember-sweetalert#service-open',
+      until: '3.0.0',
+    });
+
+    return this.fire(...arguments);
+  }
+
+  isVisible() {
+    return this.sweetAlert.isVisible();
+  }
+
+  mixin(params) {
+    return this.sweetAlert.mixin(params);
+  }
+
+  update(params) {
+    return this.sweetAlert.update(params);
+  }
 
   close() {
     this._run('close');
-  },
+  }
 
-  isVisible() {
-    return Swal.isVisible();
-  },
+  getContainer() {
+    return this.sweetAlert.getContainer();
+  }
 
-  mixin(params) {
-    return get(this, 'sweetAlert').mixin(params);
-  },
+  getHeader() {
+    return this.sweetAlert.getHeader();
+  }
 
   getTitle() {
-    return Swal.getTitle();
-  },
+    return this.sweetAlert.getTitle();
+  }
+
+  getProgressSteps() {
+    return this.sweetAlert.getProgressSteps();
+  }
 
   getCloseButton() {
-    return Swal.getCloseButton();
-  },
+    return this.sweetAlert.getCloseButton();
+  }
 
   getContent() {
-    return Swal.getContent();
-  },
+    return this.sweetAlert.getContent();
+  }
 
   getImage() {
-    return Swal.getImage();
-  },
+    return this.sweetAlert.getImage();
+  }
 
   getActions() {
-    return Swal.getActions();
-  },
+    return this.sweetAlert.getActions();
+  }
 
   getFooter() {
-    return Swal.getFooter();
-  },
+    return this.sweetAlert.getFooter();
+  }
 
   getFocusableElements() {
-    return Swal.getFocusableElements();
-  },
+    return this.sweetAlert.getFocusableElements();
+  }
 
   getConfirmButton() {
-    return Swal.getConfirmButton();
-  },
+    return this.sweetAlert.getConfirmButton();
+  }
 
   getCancelButton() {
-    return Swal.getCancelButton();
-  },
-
-  getButtonsWrapper() {
-    return Swal.getButtonsWrapper();
-  },
+    return this.sweetAlert.getCancelButton();
+  }
 
   enableButtons() {
     this._run('enableButtons');
-  },
+  }
 
   disableButtons() {
     this._run('disableButtons');
-  },
-
-  enableConfirmButton() {
-    this._run('enableConfirmButton');
-  },
-
-  disableConfirmButton() {
-    this._run('disableConfirmButton');
-  },
+  }
 
   showLoading() {
     this._run('showLoading');
-  },
+  }
 
   enableLoading() {
     this._run('enableLoading');
-  },
+  }
 
   hideLoading() {
     this._run('hideLoading');
-  },
+  }
 
   disableLoading() {
     this._run('disableLoading');
-  },
+  }
 
   isLoading() {
-    return Swal.isLoading();
-  },
+    return this.sweetAlert.isLoading();
+  }
 
   getTimerLeft() {
-    return Swal.getTimerLeft();
-  },
+    return this.sweetAlert.getTimerLeft();
+  }
 
   stopTimer() {
-    return Swal.stopTimer();
-  },
+    return this.sweetAlert.stopTimer();
+  }
 
   resumeTimer() {
-    return Swal.resumeTimer();
-  },
+    return this.sweetAlert.resumeTimer();
+  }
 
   toggleTimer() {
-    return Swal.toggleTimer();
-  },
+    return this.sweetAlert.toggleTimer();
+  }
 
   isTimerRunning() {
-    return Swal.isTimerRunning();
-  },
+    return this.sweetAlert.isTimerRunning();
+  }
 
   increaseTimer(n) {
-    return Swal.increaseTimer(n);
-  },
+    return this.sweetAlert.increaseTimer(n);
+  }
 
   clickConfirm() {
     this._run('clickConfirm');
-  },
+  }
 
   clickCancel() {
     this._run('clickCancel');
-  },
+  }
 
   getInput() {
-    return Swal.getInput();
-  },
+    return this.sweetAlert.getInput();
+  }
 
   disableInput() {
     this._run('disableInput');
-  },
+  }
 
   enableInput() {
     this._run('enableInput');
-  },
+  }
 
   showValidationMessage(error) {
     this._run('showValidationMessage', error);
-  },
-
-  showValidationError(error) {
-    this._run('showValidationError', error);
-  },
+  }
 
   resetValidationMessage() {
     this._run('resetValidationMessage');
-  },
-
-  resetValidationError() {
-    this._run('resetValidationError');
-  },
+  }
 
   getValidationMessage() {
     return this.getValidationMessage();
-  },
+  }
 
   queue() {
     this._run('queue', ...arguments);
-  },
+  }
 
   getQueueStep() {
-    return Swal.getQueueStep();
-  },
+    return this.sweetAlert.getQueueStep();
+  }
 
   insertQueueStep() {
     this._run('insertQueueStep', ...arguments);
-  },
+  }
 
   deleteQueueStep(index) {
     this._run('deleteQueueStep', index);
-  },
-
-  getProgressSteps() {
-    return Swal.getProgressSteps();
-  },
-
-  setProgressSteps() {
-    this._run('setProgressSteps', ...arguments);
-  },
-
-  showProgressSteps() {
-    this._run('showProgressSteps');
-  },
-
-  hideProgressSteps() {
-    this._run('hideProgressSteps');
-  },
+  }
 
   isValidParameter(param) {
-    return Swal.isValidParameter(param);
-  },
+    return this.sweetAlert.isValidParameter(param);
+  }
+
+  isUpdatableParameter(param) {
+    return this.sweetAlert.isUpdatableParameter(param);
+  }
 
   _run(method, ...args) {
-    scheduleOnce('afterRender', Swal, method, ...args);
-  },
-});
+    scheduleOnce('afterRender', this.sweetAlert, method, ...args);
+  }
+}

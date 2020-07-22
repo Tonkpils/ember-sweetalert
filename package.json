@@ -13,10 +13,11 @@
     "test:ember-compatibility": "ember try:each"
   },
   "dependencies": {
+    "@ember/render-modifiers": "^1.0.2",
     "ember-auto-import": "^1.6.0",
     "ember-cli-babel": "^7.20.5",
     "ember-cli-htmlbars": "^5.1.2",
-    "sweetalert2": "^7.33.1"
+    "sweetalert2": "^9.17.0"
   },
   "maintainers": [
     "Leo Correa <lcorr005@gmail.com>",

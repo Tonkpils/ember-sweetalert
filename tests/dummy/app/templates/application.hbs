@@ -1,25 +1,31 @@
-<h2 id="title">Welcome to Ember</h2>
+<h2 id="title">Welcome to Ember Sweet Alert!</h2>
 
 <hr>
-<a class="toggle1" href="#" {{action "toggle"}}>Toggle</a>
 
-{{sweet-alert "Ember Sweet Alert" "Awesome!" "success"
-  show=this.toggleModal
-  onOpen=(action (mut this.cancellation) null)
-  onConfirm=(action (mut this.enterEmail) true)
-  onCancel=(action "cancelled")
-}}
+<a class="toggle1" href="#" {{on "click" this.openModal}}>Toggle</a>
 
-{{sweet-alert
-  show=this.enterEmail
-  title="Submit email to run ajax request"
-  input="email"
-  showCancelButton=true
-  confirmButtonText="submit"
-  allowOutsideClick=false
-  preConfirm=(action "loading")
-  onConfirm=(action "updateEmail")
-}}
+<SweetAlert
+  @title="Ember Sweet Alert"
+  @text="Awesome!"
+  @icon="success"
+  @show={{this.toggleModal}}
+  @onOpen={{this.reset}}
+  @onConfirm={{this.openEmail}}
+  @onClose={{this.closeModal}}
+/>
+
+<SweetAlert
+  @show={{this.enterEmail}}
+  @title="Submit email to run ajax request"
+  @input="email"
+  @showCancelButton={{true}}
+  @confirmButtonText="Send Email"
+  @allowOutsideClick={{false}}
+  @preConfirm={{this.loading}}
+  @onConfirm={{this.updateEmail}}
+  @onCancel={{this.cancelled}}
+  @onClose={{this.closeEmail}}
+/>
 
 {{#if this.cancellation}}
   <p>Cancelled: {{this.cancellation}}</p>
@@ -30,4 +36,5 @@
 {{/if}}
 
 <hr>
-<a class="toggle2" href="#" {{action "open"}}>Open via Import</a>
+
+<a class="toggle2" href="#" {{on "click" this.open}}>Open via Import</a>
