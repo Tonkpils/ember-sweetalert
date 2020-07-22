@@ -158,8 +158,16 @@ export default Service.extend({
     this._run('showValidationMessage', error);
   },
 
+  showValidationError(error) {
+    this._run('showValidationError', error);
+  },
+
   resetValidationMessage() {
     this._run('resetValidationMessage');
+  },
+
+  resetValidationError() {
+    this._run('resetValidationError');
   },
 
   getValidationMessage() {

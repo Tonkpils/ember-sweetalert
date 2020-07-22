@@ -16,16 +16,16 @@ in Sweet Alert. Added the following:
   - `validationMessage`
   - `onAfterClose`
 - Update the list of methods available on the Sweet Alert service to match
-those available on Sweet Alert. The changes were:
-  - `getButtonWrapper` (added)
-  - `stopTimer` (added)
-  - `resumeTimer` (added)
-  - `toggleTimer` (added)
-  - `isTimerRunning` (added)
-  - `increaseTimer` (added)
-  - `showValidationMessage` (incorrectly listed as `showValidationError`)
-  - `resetValidationMessage` (incorrectly listed as `resetValidationError`)
-  - `getValidationMessage` (added)
+those available on Sweet Alert. Added the following:
+  - `getButtonWrapper`
+  - `stopTimer`
+  - `resumeTimer`
+  - `toggleTimer`
+  - `isTimerRunning`
+  - `increaseTimer`
+  - `showValidationMessage` (use instead of `showValidationError`)
+  - `resetValidationMessage` (use instead of `resetValidationError`)
+  - `getValidationMessage`
 
 ## [1.0.0] - 2020-07-22
 
