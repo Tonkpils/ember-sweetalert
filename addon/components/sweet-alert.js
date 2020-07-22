@@ -44,8 +44,10 @@ const CONFIGURATION = [
   'focusConfirm',
   'focusCancel',
   'showCloseButton',
+  'closeButtonHtml',
   'closeButtonAriaLabel',
   'showLoaderOnConfirm',
+  'scrollbarPadding',
   'preConfirm',
   'imageUrl',
   'imageWidth',
@@ -68,6 +70,7 @@ const CONFIGURATION = [
 const EVENTS = [
   'onBeforeOpen',
   'onOpen',
+  'onRender',
   'onClose',
   'onAfterClose',
 ];
@@ -84,7 +87,7 @@ export default class SweetAlertComponent extends Component {
   }
 
   @action async fire() {
-    let result = await this.swal.open(this._values());
+    let result = await this.swal.fire(this._values());
 
     if (result.value) {
       this._call('onConfirm', result);

@@ -178,7 +178,7 @@ export default Component.extend({
 
   actions: {
     confirm() {
-      this.get('swal').open({
+      this.swal.fire({
         title: 'Are you sure?',
         showCancelButton: true
       }).then(({ value }) => {

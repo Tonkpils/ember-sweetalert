@@ -17,7 +17,7 @@
     "ember-auto-import": "^1.6.0",
     "ember-cli-babel": "^7.20.5",
     "ember-cli-htmlbars": "^5.1.2",
-    "sweetalert2": "^7.33.1"
+    "sweetalert2": "^8.19"
   },
   "maintainers": [
     "Leo Correa <lcorr005@gmail.com>",

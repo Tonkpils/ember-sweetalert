@@ -1,6 +1,7 @@
 import Service from '@ember/service';
 import { getOwner } from '@ember/application';
 import { scheduleOnce } from '@ember/runloop';
+import { deprecate } from '@ember/debug';
 import { Promise } from 'rsvp';
 import Swal from 'sweetalert2';
 
@@ -14,14 +15,19 @@ export default class SweetAlertService extends Service {
     return Swal.mixin(this.config);
   }
 
-  open(...args) {
+  fire(...args) {
     return new Promise((resolve, reject) => {
-      this.sweetAlert(...args).then(resolve, reject);
+      this.sweetAlert.fire(...args).then(resolve, reject);
     });
   }
 
-  close() {
-    this._run('close');
+  open() {
+    deprecate('SweetAlertService.open() is deprecated: use SweetAlertService.fire() instead.', false, {
+      id: 'ember-sweetalert#service-open',
+      until: '3.0.0',
+    });
+
+    return this.fire(...arguments);
   }
 
   isVisible() {
@@ -30,6 +36,22 @@ export default class SweetAlertService extends Service {
 
   mixin(params) {
     return this.sweetAlert.mixin(params);
+  }
+
+  update(params) {
+    return Swal.update(params);
+  }
+
+  close() {
+    this._run('close');
+  }
+
+  getContainer() {
+    return Swal.getContainer();
+  }
+
+  getHeader() {
+    return Swal.getHeader();
   }
 
   getTitle() {
@@ -66,10 +88,6 @@ export default class SweetAlertService extends Service {
 
   getCancelButton() {
     return Swal.getCancelButton();
-  }
-
-  getButtonsWrapper() {
-    return Swal.getButtonsWrapper();
   }
 
   enableButtons() {
@@ -198,6 +216,10 @@ export default class SweetAlertService extends Service {
 
   isValidParameter(param) {
     return Swal.isValidParameter(param);
+  }
+
+  isUpdatableParameter(param) {
+    return Swal.isUpdatableParameter(param);
   }
 
   _run(method, ...args) {
