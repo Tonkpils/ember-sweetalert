@@ -26,6 +26,10 @@ export default Service.extend({
     this._run('close');
   },
 
+  isVisible() {
+    return Swal.isVisible();
+  },
+
   mixin(params) {
     return get(this, 'sweetAlert').mixin(params);
   },
@@ -46,10 +50,6 @@ export default Service.extend({
     return Swal.getImage();
   },
 
-  isVisible() {
-    return Swal.isVisible();
-  },
-
   getActions() {
     return Swal.getActions();
   },
@@ -68,6 +68,10 @@ export default Service.extend({
 
   getCancelButton() {
     return Swal.getCancelButton();
+  },
+
+  getButtonsWrapper() {
+    return Swal.getButtonsWrapper();
   },
 
   enableButtons() {
@@ -110,20 +114,32 @@ export default Service.extend({
     return Swal.getTimerLeft();
   },
 
+  stopTimer() {
+    return Swal.stopTimer();
+  },
+
+  resumeTimer() {
+    return Swal.resumeTimer();
+  },
+
+  toggleTimer() {
+    return Swal.toggleTimer();
+  },
+
+  isTimerRunning() {
+    return Swal.isTimerRunning();
+  },
+
+  increaseTimer(n) {
+    return Swal.increaseTimer(n);
+  },
+
   clickConfirm() {
     this._run('clickConfirm');
   },
 
   clickCancel() {
     this._run('clickCancel');
-  },
-
-  showValidationError(error) {
-    this._run('showValidationError', error);
-  },
-
-  resetValidationError() {
-    this._run('resetValidationError');
   },
 
   getInput() {
@@ -136,6 +152,26 @@ export default Service.extend({
 
   enableInput() {
     this._run('enableInput');
+  },
+
+  showValidationMessage(error) {
+    this._run('showValidationMessage', error);
+  },
+
+  showValidationError(error) {
+    this._run('showValidationError', error);
+  },
+
+  resetValidationMessage() {
+    this._run('resetValidationMessage');
+  },
+
+  resetValidationError() {
+    this._run('resetValidationError');
+  },
+
+  getValidationMessage() {
+    return this.getValidationMessage();
   },
 
   queue() {
@@ -176,5 +212,5 @@ export default Service.extend({
 
   _run(method, ...args) {
     scheduleOnce('afterRender', Swal, method, ...args);
-  }
+  },
 });
