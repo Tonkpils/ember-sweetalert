@@ -13,10 +13,10 @@
     "test:ember-compatibility": "ember try:each"
   },
   "dependencies": {
-    "ember-auto-import": "^1.2.19",
+    "ember-auto-import": "^1.6.0",
     "ember-cli-babel": "^7.20.5",
     "ember-cli-htmlbars": "^5.1.2",
-    "sweetalert2": "^7.24.2"
+    "sweetalert2": "^7.33.1"
   },
   "maintainers": [
     "Leo Correa <lcorr005@gmail.com>",
@@ -45,7 +45,6 @@
     "ember-source-channel-url": "^2.0.1",
     "ember-template-lint": "^2.8.0",
     "ember-try": "^1.4.0",
-    "ember-welcome-page": "^3.0.0",
     "eslint": "^7.1.0",
     "eslint-plugin-ember": "^8.6.0",
     "eslint-plugin-node": "^11.1.0",
