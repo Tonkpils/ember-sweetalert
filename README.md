@@ -1,12 +1,35 @@
-# Ember Sweet Alert
+Ember Sweet Alert
+==============================================================================
 
-An [ember-cli](http://www.ember-cli.com/) addon for using [SweetAlert2](https://limonte.github.io/sweetalert2/) in Ember applications.
+An [ember-cli](http://www.ember-cli.com/) addon for using
+[SweetAlert2](https://limonte.github.io/sweetalert2/) in Ember applications.
+
+Compatibility
+------------------------------------------------------------------------------
+
+* Ember.js v3.8 or above
+* Ember CLI v2.13 or above
+* Node.js v10 or above
 
 Installation
 ------------------------------------------------------------------------------
 
 ```
 ember install ember-sweetalert
+```
+
+IE11 requires the Babel polyfill to be present, otherwise you'll get a
+`Promise is undefined` error.
+[As per this comment](https://github.com/babel/ember-cli-babel/issues/40#issuecomment-268952820)
+you can add it via your `ember-cli-build.js` file as follows:
+
+```js
+// ember-cli-build.js
+let app = new EmberApp(defaults, {
+  'ember-cli-babel': {
+    includePolyfill: true
+  }
+});
 ```
 
 
@@ -236,6 +259,12 @@ module('Acceptance | join mailing list', function(hooks) {
   });
 });
 ```
+
+Contributing
+------------------------------------------------------------------------------
+
+See the [Contributing](CONTRIBUTING.md) guide for details.
+
 
 License
 ------------------------------------------------------------------------------
