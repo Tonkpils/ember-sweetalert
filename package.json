@@ -1,6 +1,6 @@
 {
   "name": "ember-sweetalert",
-  "version": "1.0.0-rc.1",
+  "version": "1.0.0",
   "description": "Ember Sweet Alerts with SweetAlert2",
   "scripts": {
     "build": "ember build --environment=production",
@@ -29,7 +29,6 @@
     "@glimmer/tracking": "^1.0.0",
     "babel-eslint": "^10.1.0",
     "broccoli-asset-rev": "^3.0.0",
-    "ember-auto-import": "^1.5.3",
     "ember-cli": "~3.19.0",
     "ember-cli-dependency-checker": "^3.2.0",
     "ember-cli-inject-live-reload": "^2.0.2",
