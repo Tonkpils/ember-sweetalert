@@ -24,6 +24,10 @@ export default class SweetAlertService extends Service {
     this._run('close');
   }
 
+  isVisible() {
+    return Swal.isVisible();
+  }
+
   mixin(params) {
     return this.sweetAlert.mixin(params);
   }
@@ -44,10 +48,6 @@ export default class SweetAlertService extends Service {
     return Swal.getImage();
   }
 
-  isVisible() {
-    return Swal.isVisible();
-  }
-
   getActions() {
     return Swal.getActions();
   }
@@ -66,6 +66,10 @@ export default class SweetAlertService extends Service {
 
   getCancelButton() {
     return Swal.getCancelButton();
+  }
+
+  getButtonsWrapper() {
+    return Swal.getButtonsWrapper();
   }
 
   enableButtons() {
@@ -108,20 +112,32 @@ export default class SweetAlertService extends Service {
     return Swal.getTimerLeft();
   }
 
+  stopTimer() {
+    return Swal.stopTimer();
+  }
+
+  resumeTimer() {
+    return Swal.resumeTimer();
+  }
+
+  toggleTimer() {
+    return Swal.toggleTimer();
+  }
+
+  isTimerRunning() {
+    return Swal.isTimerRunning();
+  }
+
+  increaseTimer(n) {
+    return Swal.increaseTimer(n);
+  }
+
   clickConfirm() {
     this._run('clickConfirm');
   }
 
   clickCancel() {
     this._run('clickCancel');
-  }
-
-  showValidationError(error) {
-    this._run('showValidationError', error);
-  }
-
-  resetValidationError() {
-    this._run('resetValidationError');
   }
 
   getInput() {
@@ -134,6 +150,18 @@ export default class SweetAlertService extends Service {
 
   enableInput() {
     this._run('enableInput');
+  }
+
+  showValidationMessage(error) {
+    this._run('showValidationMessage', error);
+  }
+
+  resetValidationMessage() {
+    this._run('resetValidationMessage');
+  }
+
+  getValidationMessage() {
+    return this.getValidationMessage();
   }
 
   queue() {
