@@ -4,7 +4,7 @@ All notable changes to this project will be documented in this file. This
 project adheres to [Semantic Versioning](http://semver.org/) and
 [this changelog format](http://keepachangelog.com/).
 
-## Unreleased
+## [1.1.0] - 2020-07-22
 
 ### Added
 - Updated list of configuration keys on the component to match those available
