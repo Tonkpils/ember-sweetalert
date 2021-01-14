@@ -2,7 +2,11 @@ import { module, test } from 'qunit';
 import { setupRenderingTest } from 'ember-qunit';
 import { render } from '@ember/test-helpers';
 import hbs from 'htmlbars-inline-precompile';
-import { open, confirmAndClose, cancelAndClose } from 'ember-sweetalert/test-support';
+import {
+  open,
+  confirmAndClose,
+  cancelAndClose,
+} from 'ember-sweetalert/test-support';
 
 module('Integration | Component | sweet-alert', function (hooks) {
   setupRenderingTest(hooks);
@@ -27,7 +31,9 @@ module('Integration | Component | sweet-alert', function (hooks) {
     `);
 
     assert.dom('.swal2-title').hasText('The Internet?', 'title');
-    assert.dom('.swal2-content').hasText('That thing is still around?', 'content');
+    assert
+      .dom('.swal2-content')
+      .hasText('That thing is still around?', 'content');
     assert.dom('.swal2-icon.swal2-question').hasClass('swal2-icon-show');
 
     await confirmAndClose();
