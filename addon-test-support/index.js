@@ -1,4 +1,4 @@
-import { find, click, waitUntil, waitFor } from 'ember-test-helpers';
+import { find, click, waitUntil, waitFor } from '@ember/test-helpers';
 
 const SWAL_CONTAINER = '.swal2-container';
 const SWAL_CONFIRM = '.swal2-confirm';

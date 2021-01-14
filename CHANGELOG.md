@@ -4,6 +4,15 @@ All notable changes to this project will be documented in this file. This
 project adheres to [Semantic Versioning](http://semver.org/) and
 [this changelog format](http://keepachangelog.com/).
 
+## [2.0.0] - 2021-01-14
+
+### Changed
+- Upgraded addon to Ember 3.24 (from 3.19).
+- Minimum supported Ember version is now 3.16 LTS.
+
+### Fixed
+- Import test helpers from `@ember/test-helpers` rather than `ember-test-helpers`.
+
 ## [2.0.0-alpha.1] - 2020-07-22
 
 ### Changed
