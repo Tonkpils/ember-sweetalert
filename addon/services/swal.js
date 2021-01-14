@@ -24,6 +24,11 @@ export default class SweetAlertService extends Service {
     deprecate('SweetAlertService.open() is deprecated: use SweetAlertService.fire() instead.', false, {
       id: 'ember-sweetalert#service-open',
       until: '3.0.0',
+      for: 'ember-sweetalert',
+      since: {
+        available: '2.0.0-alpha.1',
+        enabled: '2.0.0-alpha.1',
+      },
     });
 
     return this.fire(...arguments);
