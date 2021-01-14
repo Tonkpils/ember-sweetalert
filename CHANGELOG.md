@@ -4,6 +4,12 @@ All notable changes to this project will be documented in this file. This
 project adheres to [Semantic Versioning](http://semver.org/) and
 [this changelog format](http://keepachangelog.com/).
 
+## Unreleased (3.0)
+
+### Changed
+- **BREAKING** Upgrade Sweet Alert from `9.17` to `10.13`. Refer to the
+[Sweet Alert v10 release notes.](https://github.com/sweetalert2/sweetalert2/releases/tag/v10.0.0)
+
 ## Unreleased
 
 ### Changed

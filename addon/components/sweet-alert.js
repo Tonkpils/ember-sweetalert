@@ -9,6 +9,7 @@ const CONFIGURATION = [
   'html',
   'text',
   'icon',
+  'iconColor',
   'iconHtml',
   'showClass',
   'hideClass',
@@ -33,27 +34,36 @@ const CONFIGURATION = [
   'stopKeydownPropagation',
   'keydownListenerCapture',
   'showConfirmButton',
+  'showDenyButton',
   'showCancelButton',
   'confirmButtonText',
+  'denyButtonText',
   'cancelButtonText',
   'confirmButtonColor',
+  'denyButtonColor',
   'cancelButtonColor',
   'confirmButtonAriaLabel',
+  'denyButtonAriaLabel',
   'cancelButtonAriaLabel',
   'buttonsStyling',
   'reverseButtons',
   'focusConfirm',
+  'focusDeny',
   'focusCancel',
   'showCloseButton',
   'closeButtonHtml',
   'closeButtonAriaLabel',
+  'loaderHtml',
   'showLoaderOnConfirm',
   'scrollbarPadding',
   'preConfirm',
+  'preDeny',
+  'returnInputValueOnDeny',
   'imageUrl',
   'imageWidth',
   'imageHeight',
   'imageAlt',
+  'imageLabel',
   'inputPlaceholder',
   'inputValue',
   'inputOptions',
@@ -67,12 +77,18 @@ const CONFIGURATION = [
 ];
 
 const EVENTS = [
-  'onBeforeOpen',
-  'onOpen',
-  'onRender',
-  'onClose',
-  'onAfterClose',
-  'onDestroy',
+  'willOpen',
+  'onBeforeOpen', // deprecated, use willOpen
+  'didOpen',
+  'onOpen', // deprecated, use didOpen
+  'didRender',
+  'onRender', // deprecated, use didRender
+  'willClose',
+  'onClose', // deprecated, use willClose
+  'didClose',
+  'onAfterClose', // deprecated, use didClose,
+  'didDestroy',
+  'onDestroy', // deprecated, use didDestroy
 ];
 
 export default class SweetAlertComponent extends Component {
@@ -114,7 +130,9 @@ export default class SweetAlertComponent extends Component {
     });
 
     A(EVENTS).forEach(key => {
-      props[key] = () => this._call(key, ...arguments);
+      if (undefined !== this.args[key]) {
+        props[key] = () => this._call(key, ...arguments);
+      }
     });
 
     return props;

@@ -114,12 +114,12 @@ closed. For example:
 #### Actions
 
 The component supports all the Sweet Alert actions allowed via configuration:
-  - `onBeforeOpen`
-  - `onOpen`
-  - `onRender`
-  - `onClose`
-  - `onAfterClose`
-  - `onDestroy`
+  - `willOpen`
+  - `didOpen`
+  - `didRender`
+  - `willClose`
+  - `didClose`
+  - `didDestroy`
 
 In addition, the component also supports the following two actions:
   - `onConfirm`: invoked if the user clicks the confirm button within the alert.
