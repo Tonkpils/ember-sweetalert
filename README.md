@@ -93,10 +93,10 @@ a button is clicked:
 ```
 
 The Sweet Alert component follows the Data-Down, Action Up (DDAU) pattern.
-This means in the example above, the alert will only show once, as `sayHello` will remain
-`true` once the alert is closed. To allow an alert to be open/closed any number
-of times, use an action to set the show variable back to false once the alert is
-closed. For example:
+This means in the example above, the alert will only show once, as `sayHello`
+will remain `true` once the alert is closed. To allow an alert to be
+open/closed any number of times, use an action to set the show variable back
+to `false` once the alert is closed. For example:
 
 ```hbs
 {{! sayHello === false to start }}
@@ -105,7 +105,7 @@ closed. For example:
   @title="Hello World"
   @text="Welcome to our website."
   @icon="success"
-  @onClose={{action (mut this.sayHello) false}}
+  @didClose={{action (mut this.sayHello) false}}
 />
 
 <button {{action (mut this.sayHello) true}}>Click Me</button>
@@ -187,14 +187,14 @@ export default class JoinMailingListComponent extends Component {
   @title="Thank You!"
   @text="You are now on our mailing list."
   @icon="success"
-  @onClose={{this.reset}}
+  @didClose={{this.reset}}
 />
 
 <SweetAlert
   @show={{this.didNotJoin}}
   @title=":-("
   @text="Ok, we won't add you to our mailing list."
-  @onClose={{this.reset}}
+  @didClose={{this.reset}}
 />
 ```
 
