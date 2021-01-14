@@ -4,7 +4,7 @@ All notable changes to this project will be documented in this file. This
 project adheres to [Semantic Versioning](http://semver.org/) and
 [this changelog format](http://keepachangelog.com/).
 
-## Unreleased
+## [2.0.0] - 2021-01-14
 
 ### Changed
 - Upgraded addon to Ember 3.24 (from 3.19).
