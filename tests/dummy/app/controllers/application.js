@@ -23,7 +23,7 @@ export default class ApplicationController extends Controller {
 
   @action
   loading() {
-    return new Promise(resolve => {
+    return new Promise((resolve) => {
       this.swal.enableLoading();
       TESTING ? next(null, resolve) : later(resolve, 2000);
     });

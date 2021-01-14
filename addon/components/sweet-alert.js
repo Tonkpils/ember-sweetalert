@@ -105,7 +105,7 @@ export default class SweetAlertComponent extends Component {
   _values() {
     let props = {};
 
-    A(CONFIGURATION).forEach(key => {
+    A(CONFIGURATION).forEach((key) => {
       let value = this.args[key];
 
       if (undefined !== value) {
@@ -113,7 +113,7 @@ export default class SweetAlertComponent extends Component {
       }
     });
 
-    A(EVENTS).forEach(key => {
+    A(EVENTS).forEach((key) => {
       props[key] = () => this._call(key, ...arguments);
     });
 
