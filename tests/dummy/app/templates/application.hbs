@@ -9,9 +9,9 @@
   @text="Awesome!"
   @icon="success"
   @show={{this.toggleModal}}
-  @onOpen={{this.reset}}
+  @didOpen={{this.reset}}
   @onConfirm={{this.openEmail}}
-  @onClose={{this.closeModal}}
+  @willClose={{this.closeModal}}
 />
 
 <SweetAlert
@@ -24,7 +24,7 @@
   @preConfirm={{this.loading}}
   @onConfirm={{this.updateEmail}}
   @onCancel={{this.cancelled}}
-  @onClose={{this.closeEmail}}
+  @willClose={{this.closeEmail}}
 />
 
 {{#if this.cancellation}}

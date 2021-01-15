@@ -98,6 +98,10 @@ export default class SweetAlertService extends Service {
     return this.sweetAlert.getConfirmButton();
   }
 
+  getDenyButton() {
+    return this.sweetAlert.getDenyButton();
+  }
+
   getCancelButton() {
     return this.sweetAlert.getCancelButton();
   }
@@ -114,16 +118,8 @@ export default class SweetAlertService extends Service {
     this._run('showLoading');
   }
 
-  enableLoading() {
-    this._run('enableLoading');
-  }
-
   hideLoading() {
     this._run('hideLoading');
-  }
-
-  disableLoading() {
-    this._run('disableLoading');
   }
 
   isLoading() {
@@ -156,6 +152,10 @@ export default class SweetAlertService extends Service {
 
   clickConfirm() {
     this._run('clickConfirm');
+  }
+
+  clickDeny() {
+    this._run('clickDeny');
   }
 
   clickCancel() {
