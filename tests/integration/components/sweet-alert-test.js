@@ -13,11 +13,21 @@ module('Integration | Component | sweet-alert', function (hooks) {
 
   test('it renders', async function (assert) {
     await render(hbs`
-      <SweetAlert @title="Any fool can use a computer" />
+      <SweetAlert
+        @title="Any fool can use a computer"
+        data-test-swal
+      />
     `);
 
+    assert
+      .dom('[data-test-swal]')
+      .hasTagName('span')
+      .hasAttribute('aria-hidden', 'true');
+
     assert.dom('.swal2-title').hasText('Any fool can use a computer');
+
     await confirmAndClose();
+
     assert.dom('.swal2-container').doesNotExist();
   });
 

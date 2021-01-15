@@ -102,12 +102,16 @@ export default class SweetAlertComponent extends Component {
     return this.args.show;
   }
 
-  @action async fire() {
-    let result = await this.swal.fire(this._values());
+  @action
+  async fire(element, [ open ]) {
+    if (open) {
+      let result = await this.swal.fire(this._values());
 
-    if (result.value) {
-      this._call('onConfirm', result);
-    } else {
+      if (result.value) {
+        this._call('onConfirm', result);
+        return;
+      }
+
       this._call('onCancel', result);
     }
   }
