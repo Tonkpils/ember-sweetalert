@@ -61,6 +61,6 @@ export default class ApplicationController extends Controller {
 
   @action
   open() {
-    this.swal.open({ title: 'Hello World!' });
+    this.swal.fire({ title: 'Hello World!' });
   }
 }

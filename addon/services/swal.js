@@ -1,7 +1,6 @@
 import Service from '@ember/service';
 import { getOwner } from '@ember/application';
 import { scheduleOnce } from '@ember/runloop';
-import { deprecate } from '@ember/debug';
 import { Promise } from 'rsvp';
 import Swal from 'sweetalert2';
 
@@ -18,24 +17,6 @@ export default class SweetAlertService extends Service {
     return new Promise((resolve, reject) => {
       this.sweetAlert.fire(...args).then(resolve, reject);
     });
-  }
-
-  open() {
-    deprecate(
-      'SweetAlertService.open() is deprecated: use SweetAlertService.fire() instead.',
-      false,
-      {
-        id: 'ember-sweetalert#service-open',
-        until: '3.0.0',
-        for: 'ember-sweetalert',
-        since: {
-          available: '2.0.0-alpha.1',
-          enabled: '2.0.0-alpha.1',
-        },
-      }
-    );
-
-    return this.fire(...arguments);
   }
 
   isVisible() {
