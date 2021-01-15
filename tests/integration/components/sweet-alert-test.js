@@ -50,6 +50,47 @@ module('Integration | Component | sweet-alert', function (hooks) {
         @title="The Internet?"
         @text="That thing is still around?"
         @icon="question"
+        @willClose={{action (mut this.isOpen) false}}
+      />
+
+      <button {{action (mut this.isOpen) true}}>Open</button>
+    `);
+
+    assert.dom('.swal2-container').doesNotExist();
+
+    await open('button');
+
+    assert.strictEqual(this.isOpen, true);
+    assert.dom('.swal2-title').hasText('The Internet?', 'title');
+
+    await confirmAndClose();
+
+    assert.dom('.swal2-container').doesNotExist();
+    assert.strictEqual(this.isOpen, false);
+
+    await open('button');
+
+    assert.strictEqual(this.isOpen, true);
+    assert.dom('.swal2-container').exists('it can be opened a second time');
+
+    await confirmAndClose();
+
+    assert.strictEqual(this.isOpen, false);
+  });
+
+  /**
+   * The `onClose` action is deprecated and will be removed in the next
+   * major release of SweetAlert2
+   */
+  test('it can be toggled using on-close', async function (assert) {
+    this.set('isOpen', false);
+
+    await render(hbs`
+      <SweetAlert
+        @show={{this.isOpen}}
+        @title="The Internet?"
+        @text="That thing is still around?"
+        @icon="question"
         @onClose={{action (mut this.isOpen) false}}
       />
 

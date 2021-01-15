@@ -21,9 +21,7 @@ export async function waitForOpen() {
  * @return {Promise<void>} resolves when settled.
  */
 export async function waitForClose() {
-  await waitUntil(() => {
-    return !find(SWAL_CONTAINER);
-  });
+  await waitUntil(() => false === Boolean(find(SWAL_CONTAINER)));
 }
 
 /**

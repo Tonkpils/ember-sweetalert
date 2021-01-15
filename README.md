@@ -105,7 +105,7 @@ to `false` once the alert is closed. For example:
   @title="Hello World"
   @text="Welcome to our website."
   @icon="success"
-  @didClose={{action (mut this.sayHello) false}}
+  @willClose={{action (mut this.sayHello) false}}
 />
 
 <button {{action (mut this.sayHello) true}}>Click Me</button>
@@ -187,14 +187,14 @@ export default class JoinMailingListComponent extends Component {
   @title="Thank You!"
   @text="You are now on our mailing list."
   @icon="success"
-  @didClose={{this.reset}}
+  @willClose={{this.reset}}
 />
 
 <SweetAlert
   @show={{this.didNotJoin}}
   @title=":-("
   @text="Ok, we won't add you to our mailing list."
-  @didClose={{this.reset}}
+  @willClose={{this.reset}}
 />
 ```
 
