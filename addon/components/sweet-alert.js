@@ -103,7 +103,7 @@ export default class SweetAlertComponent extends Component {
   }
 
   @action
-  async fire(element, [ open ]) {
+  async fire(element, [open]) {
     if (open) {
       let result = await this.swal.fire(this._values());
 
