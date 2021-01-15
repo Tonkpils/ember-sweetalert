@@ -24,7 +24,7 @@ export default class ApplicationController extends Controller {
   @action
   loading() {
     return new Promise((resolve) => {
-      this.swal.enableLoading();
+      this.swal.showLoading();
       TESTING ? next(null, resolve) : later(resolve, 2000);
     });
   }
@@ -61,6 +61,6 @@ export default class ApplicationController extends Controller {
 
   @action
   open() {
-    this.swal.open({ title: 'Hello World!' });
+    this.swal.fire({ title: 'Hello World!' });
   }
 }

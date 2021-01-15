@@ -4,6 +4,20 @@ All notable changes to this project will be documented in this file. This
 project adheres to [Semantic Versioning](http://semver.org/) and
 [this changelog format](http://keepachangelog.com/).
 
+## [3.0.0] - 2021-01-15
+
+### Changed
+- **BREAKING** Upgrade SweetAlert from `9.17` to `10.13`. Refer to the
+[Sweet Alert v10 release notes.](https://github.com/sweetalert2/sweetalert2/releases/tag/v10.0.0)
+- The `<SweetAlert>` component previously rendered a `<span>` tag within a
+`<div>` tag. This has been changed so that just a `<span>` tag is now used.
+This is unlikely to be a breaking change, unless you were relying on
+the elements for page layout and/or CSS.
+
+### Removed
+- **BREAKING** The previously deprecated `open` method on the SweetAlert
+service has been removed. Use the `fire` method instead.
+
 ## [2.0.1] - 2021-01-14
 
 ### Fixed
