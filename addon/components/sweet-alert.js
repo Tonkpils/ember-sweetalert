@@ -55,6 +55,7 @@ const CONFIGURATION = [
   'closeButtonAriaLabel',
   'loaderHtml',
   'showLoaderOnConfirm',
+  'showLoaderOnDeny',
   'scrollbarPadding',
   'preConfirm',
   'preDeny',
